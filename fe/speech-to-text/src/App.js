@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import './App.css'
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition
@@ -54,28 +53,33 @@ function App() {
   }
 
   return (
-    <>
-      <h1>Diagnoze</h1>
-      <div className="container">
-        <div className="box">
-          <h2>Tell your condition</h2>
-          {isListen ? <span>▶️</span> : <span>⏹️</span>}
-          <button onClick={handleSaveDiagnoze} disabled={!diagnoze}>
-            Save Diagnoze
-          </button>
-          <button onClick={() => setIsListen(prevState => !prevState)}>
-            On/Off
-          </button>
-          <p>{diagnoze}</p>
+    <div className='min-h-screen w-full p-5'>
+      <h1 className='font-semibold text-center text-2xl mb-4'>Diagnoze</h1>
+      <div className="h-full w-full flex flex-col lg:flex-row lg:justify-center gap-8">
+        <div className="h-64 w-full max-w-lg shadow-md border-gray-200 border-[1px]  mx-auto lg:mx-2 p-2">
+            <h2 className='font-medium text-center text-lg mb-3'>Tell your condition</h2>
+          <div className='w-full flex flex-col justify-center '>
+          {isListen ? <div className='w-fit p-8 mx-auto border-gray-200 border-[1px]'>
+              <p className='text-center'>{diagnoze}</p>
+            </div> : <span></span>
+          }
+            {isListen ? <span>▶️<span className='text-gray-400'>Speak now</span></span> : <span></span>}
+            <button onClick={() => setIsListen(prevState => !prevState)}>
+            {isListen ? <span className='px-2 py-1 rounded-lg bg-slate-200 font-semibold text-xs'>Off</span> : <span className='px-2 py-1 rounded-lg bg-slate-200 font-semibold text-xs '>ON</span>}
+            </button>
+            <button onClick={handleSaveDiagnoze} disabled={!diagnoze} >
+              Save Diagnoze
+            </button>
+          </div>
         </div>
-        <div className="box">
-          <h2>Diagnoze</h2>
+        <div className="h-64 w-full max-w-lg shadow-md border-gray-200 border-[1px] mx-auto lg:mx-2 p-2">
+          <h2 className='font-medium text-center text-lg'>Diagnoze</h2>
           {savedDiagnoze.map(n => (
             <p key={n}>{n}</p>
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
