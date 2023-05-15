@@ -1,0 +1,8 @@
+# Ignore file dengan ekstensi .log
+*.log
+
+# Ignore folder "node_modules"
+/node_modules
+
+# Ignore file dengan nama "config.ini"
+config.ini

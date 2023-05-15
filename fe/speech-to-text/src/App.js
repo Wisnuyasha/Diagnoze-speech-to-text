@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition
@@ -8,10 +9,20 @@ mic.continuous = true
 mic.interimResults = true
 mic.lang = ('en-US','id-ID')
 
-function App() {
+export default function App() {
   const [isListen, setIsListen] = useState(false)
   const [diagnoze, setDiagnoze] = useState(null)
   const [savedDiagnoze, setSavedDiagnoze] = useState([])
+  const [medicine, setMedicine] = useState([])
+
+  async function getData(query) {
+    const response = await axios.get('http://localhost:5000/api/buy-medicine/products/search', {
+      params: {
+        query: query
+      }
+    });
+    return response.data;
+  }
 
   useEffect(() => {
     handleListen()
@@ -47,7 +58,15 @@ function App() {
     }
   }
 
-  const handleSaveDiagnoze = () => {
+  const handleSaveDiagnoze = async () => {
+    const result = await getData(diagnoze);
+    console.log("result", result)
+    if (Array.isArray(result)) {
+      setMedicine(result);
+    } else {
+      setMedicine([]);
+    } // ganti penggunaan fungsi didalam handlesave, ganti pake state
+    console.log("medicine", medicine)
     setSavedDiagnoze([...savedDiagnoze, diagnoze])
     setDiagnoze('')
   }
@@ -67,20 +86,22 @@ function App() {
             <button onClick={() => setIsListen(prevState => !prevState)}>
             {isListen ? <span className='px-2 py-1 rounded-lg bg-slate-200 font-semibold text-xs'>Off</span> : <span className='px-2 py-1 rounded-lg bg-slate-200 font-semibold text-xs '>ON</span>}
             </button>
-            <button onClick={handleSaveDiagnoze} disabled={!diagnoze} >
+            <button onClick={async () => await handleSaveDiagnoze()} disabled={!diagnoze} >
               Save Diagnoze
             </button>
           </div>
         </div>
         <div className="h-64 w-full max-w-lg shadow-md border-gray-200 border-[1px] mx-auto lg:mx-2 p-2">
           <h2 className='font-medium text-center text-lg'>Diagnoze</h2>
-          {savedDiagnoze.map(n => (
-            <p key={n}>{n}</p>
+          {medicine.map(med => ( 
+            <div className='' key={med.external_id}>
+              <p>{med.name}</p>
+              <image src={med.image_url} alt={med.name} />
+              <p>Range Harga: {med.min_price} - {med.base_price}</p>
+            </div> 
           ))}
         </div>
       </div>
     </div>
   )
 }
-
-export default App
