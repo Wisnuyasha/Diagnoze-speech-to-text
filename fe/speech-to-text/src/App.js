@@ -13,9 +13,14 @@ export default function App() {
   const [isListen, setIsListen] = useState(false)
   const [diagnoze, setDiagnoze] = useState(null)
   const [savedDiagnoze, setSavedDiagnoze] = useState([])
+  const [medicine, setMedicine] = useState([])
 
   async function getData(query) {
-    const response = await axios.get(`http://localhost:5000/api/buy-medicine/products/search/${query}`);
+    const response = await axios.get('http://localhost:5000/api/buy-medicine/products/search', {
+      params: {
+        query: query
+      }
+    });
     return response.data;
   }
 
@@ -55,7 +60,13 @@ export default function App() {
 
   const handleSaveDiagnoze = async () => {
     const result = await getData(diagnoze);
-    console.log(result);
+    console.log("result", result)
+    if (Array.isArray(result)) {
+      setMedicine(result);
+    } else {
+      setMedicine([]);
+    } // ganti penggunaan fungsi didalam handlesave, ganti pake state
+    console.log("medicine", medicine)
     setSavedDiagnoze([...savedDiagnoze, diagnoze])
     setDiagnoze('')
   }
@@ -82,8 +93,12 @@ export default function App() {
         </div>
         <div className="h-64 w-full max-w-lg shadow-md border-gray-200 border-[1px] mx-auto lg:mx-2 p-2">
           <h2 className='font-medium text-center text-lg'>Diagnoze</h2>
-          {savedDiagnoze.map(n => (
-            <p key={n}>{n}</p>
+          {medicine.map(med => ( 
+            <div className='' key={med.external_id}>
+              <p>{med.name}</p>
+              <image src={med.image_url} alt={med.name} />
+              <p>Range Harga: {med.min_price} - {med.base_price}</p>
+            </div> 
           ))}
         </div>
       </div>
