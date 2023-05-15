@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition
@@ -8,10 +9,15 @@ mic.continuous = true
 mic.interimResults = true
 mic.lang = ('en-US','id-ID')
 
-function App() {
+export default function App() {
   const [isListen, setIsListen] = useState(false)
   const [diagnoze, setDiagnoze] = useState(null)
   const [savedDiagnoze, setSavedDiagnoze] = useState([])
+
+  async function getData(query) {
+    const response = await axios.get(`http://localhost:5000/api/buy-medicine/products/search/${query}`);
+    return response.data;
+  }
 
   useEffect(() => {
     handleListen()
@@ -47,7 +53,9 @@ function App() {
     }
   }
 
-  const handleSaveDiagnoze = () => {
+  const handleSaveDiagnoze = async () => {
+    const result = await getData(diagnoze);
+    console.log(result);
     setSavedDiagnoze([...savedDiagnoze, diagnoze])
     setDiagnoze('')
   }
@@ -67,7 +75,7 @@ function App() {
             <button onClick={() => setIsListen(prevState => !prevState)}>
             {isListen ? <span className='px-2 py-1 rounded-lg bg-slate-200 font-semibold text-xs'>Off</span> : <span className='px-2 py-1 rounded-lg bg-slate-200 font-semibold text-xs '>ON</span>}
             </button>
-            <button onClick={handleSaveDiagnoze} disabled={!diagnoze} >
+            <button onClick={async () => await handleSaveDiagnoze()} disabled={!diagnoze} >
               Save Diagnoze
             </button>
           </div>
@@ -82,5 +90,3 @@ function App() {
     </div>
   )
 }
-
-export default App
