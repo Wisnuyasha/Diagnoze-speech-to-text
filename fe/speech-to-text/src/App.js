@@ -36,6 +36,18 @@ export default function App() {
     });
   }
 
+  async function getMedicineDetail(id) {
+    await axios.get(`http://localhost:5000/api/buy-medicine/products/${id}`)
+      .then(response => {
+        console.log(response);
+        console.log(response.data)
+        alert(response.data.description); // Menampilkan deskripsi dalam alert, ganti sesuai kebutuhan
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
     console.log("useEffect", medicine);
   }, [medicine]);
@@ -97,6 +109,10 @@ export default function App() {
     setDiagnoze('')
   }
 
+  const handleClearDiagnoze = () => {
+    setSavedDiagnoze([])
+  }
+
   return (
     <div className='min-h-screen w-full p-5'>
       <h1 className='font-semibold text-center text-2xl mb-4'>Diagnoze</h1>
@@ -122,6 +138,7 @@ export default function App() {
           {savedDiagnoze.map(n => (
             <p key={n}>{n}</p>
           ))}
+          <button onClick={handleClearDiagnoze}> Clear Diagnoze </button>
           {/* {typeof medicine == Object || Array.isArray(medicine) ? Object.keys(medicine).map(key => (
             <div key={key}>
               <p>{medicine[key].name}</p>
@@ -137,6 +154,7 @@ export default function App() {
                 <p>{med.name}</p>
                 <img src={med.image_url} alt={med.name} className='w-40 mx-auto' />
                 <p>Range Harga: Rp.{med.min_price} - Rp.{med.base_price}</p>
+                <button onClick={() => getMedicineDetail(med.external_id)}>Details</button>
               </div> 
             )) : 
             ""
