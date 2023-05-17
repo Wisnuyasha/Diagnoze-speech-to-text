@@ -19,11 +19,12 @@ app.get('/api/buy-medicine/products/search', async (req, res) => {
   }
 });
 
-app.get('/api/buy-medicine/products/:id', async (req, res) => {
-  const { id } = req.params;
+app.get('/api/buy-medicine/products/details', async (req, res) => {
+  const { query } = req.query;
 
   try {
-    const response = await axios.get(`https://magneto.api.halodoc.com/api/v1/buy-medicine/products/${id}`);
+    console.log(query)
+    const response = await axios.get(`https://magneto.api.halodoc.com/api/v1/buy-medicine/products/detail/${query}`);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.json(response.data);
   } catch (error) {
