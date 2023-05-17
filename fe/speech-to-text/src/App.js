@@ -13,23 +13,32 @@ export default function App() {
   const [isListen, setIsListen] = useState(false)
   const [diagnoze, setDiagnoze] = useState(null)
   const [savedDiagnoze, setSavedDiagnoze] = useState([])
-  const [medicine, setMedicine] = useState(null)
+  const [medicine, setMedicine] = useState([])
 
   async function getData(query) {
-    console.log("quiery" + query)
     await axios.get('http://localhost:5000/api/buy-medicine/products/search', {
       params: {
         query: query
       }
     })
     .then(response => {
-      console.log(response);
-      console.log(response.data)
-      console.log(response.data.result)
-      console.log("apakah object" + typeof response.data.result)
       const api = response.data.result;
       setMedicine(api);
-      console.log("medicine"+medicine)
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+  async function getMedicineDetail(slug) {
+    await axios.get(`http://localhost:5000/api/buy-medicine/products/details`, {
+      params: {
+        query: slug
+      }
+    })
+    .then(response => {
+      console.log(response);
+      alert(response.data.description); 
     })
     .catch(error => {
       console.error(error);
@@ -37,23 +46,12 @@ export default function App() {
   }
 
   useEffect(() => {
-    console.log("useEffect", medicine);
-  }, [medicine]);
+    handleListen();
+  }, [isListen])
 
   useEffect(() => {
-    handleListen();
-    // const fetchData = async () => {
-    //   setIsLoading(true);
-    //   try {
-    //     const response = await axios.get('https://example.com/api/data');
-    //     setData(response.data);
-    //     setIsLoading(false);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
-    // fetchData();
-  }, [isListen])
+    console.log("useEffect", medicine);
+  }, [medicine]);
 
   const handleListen = () => {
     if (isListen) {
@@ -87,14 +85,12 @@ export default function App() {
 
   const handleSaveDiagnoze = async () => {
     await getData(diagnoze);
-    console.log(medicine)
-    // if (Array.isArray(result)) {
-    //   setMedicine(result);
-    // } else {
-    //   setMedicine([]);
-    // } // ganti penggunaan fungsi didalam handlesave, ganti pake state
     setSavedDiagnoze([...savedDiagnoze, diagnoze])
     setDiagnoze('')
+  }
+
+  const handleClearDiagnoze = () => {
+    setSavedDiagnoze([])
   }
 
   return (
@@ -122,13 +118,7 @@ export default function App() {
           {savedDiagnoze.map(n => (
             <p key={n}>{n}</p>
           ))}
-          {/* {typeof medicine == Object || Array.isArray(medicine) ? Object.keys(medicine).map(key => (
-            <div key={key}>
-              <p>{medicine[key].name}</p>
-              <img src={medicine[key].image_url} alt={medicine[key].name} />
-              <p>Range Harga: {medicine[key].min_price} - {medicine[key].base_price}</p>
-            </div>
-          )) : <p>No medicine found</p>} */}
+          <button onClick={handleClearDiagnoze}> Clear Diagnoze </button>
         </div>
       </div>
       <div className='w-full h-full mt-3 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-2 px-7 '>
@@ -137,6 +127,7 @@ export default function App() {
                 <p>{med.name}</p>
                 <img src={med.image_url} alt={med.name} className='w-40 mx-auto' />
                 <p>Range Harga: Rp.{med.min_price} - Rp.{med.base_price}</p>
+                <button onClick={async () => await getMedicineDetail(med.slug)}>Details</button>
               </div> 
             )) : 
             ""
