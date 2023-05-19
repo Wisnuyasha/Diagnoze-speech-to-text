@@ -5,6 +5,15 @@ import React, { useEffect, useState } from "react";
 const Hospitals = () => {
   const [currentCity, setCurrentCity] = useState("")
 
+  
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getCurrentCity);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   const getCurrentCity = async (position) => {
     let lat = position.coords.latitude;
     let long = position.coords.longitude;
@@ -17,16 +26,19 @@ const Hospitals = () => {
         const city = response.data.address.city
         setCurrentCity(city)
       });
-    console.log(currentCity);
   };
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getCurrentCity);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }, [currentCity]);
+  const getNearestHospitals = (currentCity) => { 
+    axios
+      .put(`http://localhost:5001/hospital/location`, {
+        search : currentCity
+      })
+      .then((response) => {
+        console.log(response.data);
+      }).catch((error) => {
+        throw error;
+      });
+   }
 
 
   return (
@@ -37,6 +49,7 @@ const Hospitals = () => {
         <ul>
           <li></li>
         </ul>
+        <button onClick={getNearestHospitals}>anjay</button>
       </div>
     </>
   );
