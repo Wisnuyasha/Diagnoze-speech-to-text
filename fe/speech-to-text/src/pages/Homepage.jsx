@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import MedicineList from "../components/MedicineList";
 import axios from "axios";
+import DoctorList from "../components/DoctorList";
+
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -15,6 +17,7 @@ const Homepage = () => {
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
   const [medicine, setMedicine] = useState([]);
+  const [doctors, setDoctors] = useState([]);
 
   async function getData(query) {
     await axios
@@ -26,6 +29,22 @@ const Homepage = () => {
       .then((response) => {
         const api = response.data.result;
         setMedicine(api);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  async function getDoctorsData(query) {
+    await axios
+      .get("http://localhost:5000/api/tanya-dokter/doctors/search", {
+        params: {
+          query: query,
+        },
+      })
+      .then((response) => {
+        const api = response.data.result;
+        setDoctors(api);
       })
       .catch((error) => {
         console.error(error);
@@ -72,6 +91,7 @@ const Homepage = () => {
 
   const handleSaveDiagnoze = async () => {
     await getData(diagnoze);
+    await getDoctorsData(diagnoze); // tambahkan ini untuk mendapatkan data dokter berdasarkan diagnosa
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
   };
@@ -132,6 +152,7 @@ const Homepage = () => {
           </div>
         </div>
         <MedicineList medicine={medicine} />
+        <DoctorList doctors={doctors} />
       </div>
     </>
   );

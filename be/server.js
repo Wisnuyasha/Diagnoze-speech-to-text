@@ -37,12 +37,12 @@ app.get("/api/buy-medicine/products/details", async (req, res) => {
   }
 });
 
-app.get("/api/hospitals", async (req, res) => {
-  let { query } = req.body;
+app.get("/api/tanya-dokter/doctors/search", async (req, res) => {
+  const { query } = req.query;
 
   try {
     const response = await axios.get(
-      `https://magneto.api.halodoc.com/api/rumah-sakit/v1/hospitals/suggestions`,
+      `https://magneto.api.halodoc.com/api/v1/tanya-dokter/doctors/${query}`,
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(response.data);
