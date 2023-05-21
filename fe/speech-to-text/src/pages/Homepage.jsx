@@ -15,42 +15,6 @@ const Homepage = () => {
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
   const [medicine, setMedicine] = useState([]);
-  const [medicineDetail, setMedicineDetail] = useState(null);
-  const [showModal, setShowModal] = useState(false)
-
-  const handleOnClose = () => setShowModal(false)
-
-  const modalRef = useRef();
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setShowModal(false);
-      }
-    };
-  
-    document.addEventListener("mousedown", handleClickOutside);
-  
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [modalRef]);
-
-  async function getMedicineDetail(slug) {
-    await axios
-      .get(`http://localhost:5000/api/buy-medicine/products/details`, {
-        params: {
-          query: slug,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setMedicineDetail(response.data);
-        // alert(response.data.description);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
 
   async function getData(query) {
     await axios
@@ -167,48 +131,7 @@ const Homepage = () => {
             <button onClick={handleClearDiagnoze}> Clear Diagnoze </button>
           </div>
         </div>
-        <div className="w-full h-full mt-3 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-2 px-7 ">
-            {medicine
-                ? medicine.map((med) => (
-                    <div
-                      className=" p-4 shadow-md border-gray-200 border-[1px]"
-                      key={med.external_id}
-                    >
-                      <p>{med.name}</p>
-                      <img
-                        src={med.image_url}
-                        alt={med.name}
-                        className="w-40 mx-auto"
-                      />
-                      <p>
-                        Range Harga: Rp.{med.min_price} - Rp.{med.base_price}
-                      </p>
-                      <button
-                        onClick={async () => {
-                          await getMedicineDetail(med.slug) 
-                          setShowModal(true)
-                        }}
-                      >
-                        Details
-                      </button>
-                      {showModal ? 
-                        <div
-                        onClick={() => setShowModal(false)}
-                        className="flex justify-center items-center fixed inset-0 bg-black bg-opacity-5 backdrop-blur-md"
-                      >
-                        <div ref={modalRef} className="bg-slate-100 p-4 w-56 rounded-md">
-                          <p onClick={() => setShowModal(false)}>X</p>
-                          {medicineDetail.description}
-                        </div>
-                      </div>
-                        : null
-                      }
-                    </div>
-                  ))
-                : ""
-            }
-        </div>
-        {/* <MedicineList medicine={medicine} /> */}
+        <MedicineList medicine={medicine} />
       </div>
     </>
   );

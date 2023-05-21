@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 
 export default function MedicineDetail(props) {
   const [medicineDetail, setMedicineDetail] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    async function fetchMedicineDetail() {
-      await axios
-        .get(
-          `http://localhost:5000/api/buy-medicine/products/details?id=${props.match.params.id}`
-        )
-        .then((response) => {
-          console.log(response.data);
-          setMedicineDetail(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-    fetchMedicineDetail();
-  }, [props.match.params.id]);
+    async function getMedicineDetail() {
+        await axios
+          .get(`http://localhost:5000/api/buy-medicine/products/details`, {
+            params: {
+              query: id,
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+            setMedicineDetail(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+      getMedicineDetail();
+  }, []);
 
   return (
     <div>
@@ -30,7 +34,7 @@ export default function MedicineDetail(props) {
           <p>{medicineDetail.description}</p>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Loading... {id}</p>
       )}
     </div>
   );

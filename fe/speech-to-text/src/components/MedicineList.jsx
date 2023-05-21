@@ -51,9 +51,6 @@ export default function MedicineList({ medicine }) {
                 }}
               >
                 <button
-                  onClick={async () => {
-                    await getMedicineDetail(med.slug);
-                  }}
                 >
                   Details
                 </button>
