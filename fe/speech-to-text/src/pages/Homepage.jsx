@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MedicineList from "../components/MedicineList";
+import DoctorsList from "../components/DoctorsList";
 import LandingPage from "../components/LandingPage";
 import axios from "axios";
 import Navbar from "../components/Navbar";
@@ -18,6 +19,7 @@ const Homepage = () => {
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
   const [medicine, setMedicine] = useState([]);
+  const [doctors, setDoctors] = useState([]);
 
   async function getData(query) {
     await axios
@@ -29,6 +31,22 @@ const Homepage = () => {
       .then((response) => {
         const api = response.data.result;
         setMedicine(api);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  async function getDoctors(query) {
+    await axios
+      .get("http://localhost:5000/api/doctors/search", {
+        params: {
+          query: query,
+        },
+      })
+      .then((response) => {
+        const api = response.data.result;
+        setDoctors(api);
       })
       .catch((error) => {
         console.error(error);
@@ -75,6 +93,7 @@ const Homepage = () => {
 
   const handleSaveDiagnoze = async () => {
     await getData(diagnoze);
+    await getDoctors(diagnoze);
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
   };
@@ -275,6 +294,8 @@ const Homepage = () => {
               </div>
             </div>
             <MedicineList medicine={medicine} />
+            <br></br>
+            <DoctorsList doctors={doctors} />
           </div>
         </div>
         {/* */}
