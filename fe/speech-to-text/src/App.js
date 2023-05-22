@@ -9,7 +9,6 @@ export default function App() {
     <>
       <div className="App">
         <Router>
-          <Navbar/>
           <Routes>
             <Route path={"/"} element={<Homepage />} />
             <Route path={"/hospitals"} element={<Hospitals />} />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 
-export default function MedicineDetail(props) {
+export default function MedicineDetail() {
   const [medicineDetail, setMedicineDetail] = useState(null);
   const { id } = useParams();
 

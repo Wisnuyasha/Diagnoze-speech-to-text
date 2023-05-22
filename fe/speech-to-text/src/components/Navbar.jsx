@@ -1,82 +1,122 @@
-import React from 'react'
+import React from "react";
 
-const Navbar = () => {
+export default function Navbar() {
   return (
-    <> 
-<nav
-  class="relative flex w-full flex-nowrap items-center justify-between bg-white-100 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:flex-wrap lg:justify-start lg:py-4"
-  data-te-navbar-ref>
-  <div class="flex w-full flex-wrap items-center justify-between px-3">
-   
-    <button
-      class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
-      type="button"
-      data-te-collapse-init
-      data-te-target="#navbarSupportedContent3"
-      aria-controls="navbarSupportedContent3"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
-     
-      <span class="[&>svg]:w-7">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="h-7 w-7">
-          <path
-            fill-rule="evenodd"
-            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-            clip-rule="evenodd" />
-        </svg>
-      </span>
-    </button>
+    <>
+      <div className="w-1/3 hidden lg:block rounded-xl">
+        {/* <button
+          data-drawer-target="default-sidebar"
+          data-drawer-toggle="default-sidebar"
+          aria-controls="default-sidebar"
+          type="button"
+          className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-800 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+        >
+          <span className="sr-only">Open sidebar</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-8 h-8"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button> */}
 
-    <div
-      class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
-      id="navbarSupportedContent3"
-      data-te-collapse-item>
-   
-      <a class="pr-2 text-xl text-black dark:text-neutral-200" href="#"
-        >Navbar</a>
-      <ul
-        class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
-        data-te-navbar-nav-ref>
-    
-        <li class="my-4 lg:my-0 lg:pr-2" data-te-nav-item-ref>
-          <a
-            class="active disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            aria-current="page"
-            href="#"
-            data-te-nav-link-ref
-            >Home</a>
-        </li>
-    
-        <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-          <a
-            class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            href="#"
-            data-te-nav-link-ref
-            >Features</a>
-        </li>
-   
-        <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-          <a
-            class="p-0 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            href="#"
-            data-te-nav-link-ref
-            >Pricing</a>
-        </li>
-        <li class="lg:pr-2" data-te-nav-link-ref>
-          <a
-            class="text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-            >Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        <aside
+          id="default-sidebar"
+          className="h-screen transition-transform -translate-x-full sm:translate-x-0 rounded-xl"
+          aria-label="Sidebar"
+        >
+          <div className="h-full px-3 py-4 overflow-y-auto bg-white rounded-xl">
+            <div className="mx-6">
+              <div class="flex flex-col items-center mt-16 ">
+                <img
+                  class="object-cover w-24 h-24 mx-2 rounded-full"
+                  src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                  alt="avatar"
+                ></img>
+                <p class="mx-2 mt-2 font-extrabold text-3xl text-gray-800 ">
+                  Diagno.ze
+                </p>
+              </div>
+
+              <div className="mx-8">
+                <ul className="space-y-2 font-medium mt-8 hover:text-white">
+                  <li className="rounded-full flex items-center bg-[#45486E]">
+                    <a
+                      href="#"
+                      className="flex items-center text-center justify-center p-4 text-white rounded-lg "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-8 h-8"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span className="ml-3 font-nunito text-xl">
+                        Dashboard
+                      </span>
+                    </a>
+                  </li>
+                  <li className="rounded-full flex items-center hover:bg-[#45486E] hover:text-white">
+                    <a
+                      href="#"
+                      className="flex items-center text-center justify-center p-4 text-black rounded-lg hover:text-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-8 h-8"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span className="ml-3 font-nunito text-xl">Hospital</span>
+                    </a>
+                  </li>
+
+                  <li className="rounded-full flex items-center hover:bg-[#45486E]">
+                    <a
+                      href="#"
+                      className="flex items-center text-center justify-center p-4 text-black hover:text-white rounded-lg "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163 3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+
+                      <span className="ml-3 font-nunito text-xl">Products</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </>
-  )
+  );
 }
-
-export default Navbar
