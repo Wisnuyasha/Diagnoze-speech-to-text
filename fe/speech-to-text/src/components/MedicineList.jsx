@@ -35,15 +35,15 @@ export default function MedicineList({ medicine }) {
               className=" p-4 shadow-md border-gray-200 border-[1px]"
               key={med.external_id}
             >
-              <p>{med.name}</p>
+              <p>{med.first_name}</p>
               <img
                 src={med.image_url}
-                alt={med.name}
+                alt={med.first_name}
                 className="w-40 mx-auto"
               />
-              <p>
+              {/* <p>
                 Range Harga: Rp.{med.min_price} - Rp.{med.base_price}
-              </p>
+              </p> */}
               <Link
                 to={{
                   pathname: `/details/${med.slug}`,
