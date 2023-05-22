@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 export default function MedicineList({ medicine }) {
-
   return (
     <div className="w-full h-full mt-3 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-2 px-7 ">
       {medicine

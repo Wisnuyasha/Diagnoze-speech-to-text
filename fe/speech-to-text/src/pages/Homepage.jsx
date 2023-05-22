@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MedicineList from "../components/MedicineList";
+import LandingPage from "../components/LandingPage"
 import axios from "axios";
 
 const SpeechRecognition =
@@ -82,8 +83,9 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="min-h-screen w-full p-5">
-        <h1 className="font-semibold text-center text-2xl mb-4">Diagnoze</h1>
+      <div className="min-h-screen w-full">
+        <LandingPage />
+        {/* Diagnoze bar*/}
         <div className="h-full w-full flex flex-col lg:flex-row lg:justify-center gap-8">
           <div className="h-64 w-full max-w-lg shadow-md border-gray-200 border-[1px]  mx-auto lg:mx-2 p-2">
             <h2 className="font-medium text-center text-lg mb-3">
@@ -131,6 +133,7 @@ const Homepage = () => {
             <button onClick={handleClearDiagnoze}> Clear Diagnoze </button>
           </div>
         </div>
+        {/* */}
         <MedicineList medicine={medicine} />
       </div>
     </>
