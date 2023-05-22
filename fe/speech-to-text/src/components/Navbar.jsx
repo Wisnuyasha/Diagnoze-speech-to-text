@@ -3,7 +3,7 @@ import React from "react";
 export default function Navbar() {
   return (
     <>
-      <div className="w-1/3 hidden lg:block">
+      <div className="w-1/4 xl:w-1/3 hidden lg:block">
       <button
           data-drawer-target="default-sidebar"
           data-drawer-toggle="default-sidebar"
