@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MedicineList from "../components/MedicineList";
 import LandingPage from "../components/LandingPage"
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -83,7 +84,9 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="min-h-screen max-h-full w-full pt-5 md:pt-7 bg-dbg">
+      <div className="min-h-screen max-h-full w-full flex pt-5 md:pt-7 bg-dbg">
+        <Navbar />
+        <div>
         <LandingPage />
         {/* Diagnoze bar*/}
         <div className="w-full flex flex-col border-black h-fit p-6 sm:px-9 md:px-11 md:pt-8">
@@ -167,6 +170,7 @@ const Homepage = () => {
             </div>
           </div>
           <MedicineList medicine={medicine} />
+        </div>
         </div>
         {/* */}
       </div>

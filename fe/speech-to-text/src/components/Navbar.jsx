@@ -3,8 +3,8 @@ import React from "react";
 export default function Navbar() {
   return (
     <>
-      <div className="w-1/4">
-        {/* <button
+      <div className="w-1/3 hidden lg:block">
+      <button
           data-drawer-target="default-sidebar"
           data-drawer-toggle="default-sidebar"
           aria-controls="default-sidebar"
@@ -24,14 +24,14 @@ export default function Navbar() {
               clip-rule="evenodd"
             />
           </svg>
-        </button> */}
+        </button>
 
-        {/* <aside
+        <aside
           id="default-sidebar"
           className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
           aria-label="Sidebar"
-        > */}
-          {/* <div className="h-full px-3 py-4 overflow-y-auto bg-white mt-8">
+        >
+          <div className="h-full px-3 py-4 overflow-y-auto bg-white mt-8">
             <div class="flex flex-col items-center mt-6 -mx-2">
               <img
                 class="object-cover w-24 h-24 mx-2 rounded-full"
@@ -108,8 +108,8 @@ export default function Navbar() {
                 </a>
               </li>
             </ul>
-          </div> */}
-        {/* </aside> */}
+          </div>
+        </aside>
       </div>
     </>
   );
