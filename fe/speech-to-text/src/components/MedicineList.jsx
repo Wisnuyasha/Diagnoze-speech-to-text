@@ -3,30 +3,30 @@ import { Link } from "react-router-dom"
 
 export default function MedicineList({ medicine }) {
   return (
-    <div className="w-full h-full mt-3 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-2 px-7 ">
+    <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 2xl:grid-cols-4 md:mt-5 gap-7 md:gap-11 p-2 px-8 sm:p-0">
       {medicine
         ? medicine.map((med) => (
             <div
-              className=" p-4 shadow-md border-gray-200 border-[1px]"
+              className=" p-4 sm:p-5 md:p-6 bg-white shadow-lg flex flex-col gap-2 rounded-2xl "
               key={med.external_id}
             >
-              <p>{med.name}</p>
               <img
                 src={med.image_url}
                 alt={med.name}
                 className="w-40 mx-auto"
               />
-              <p>
-                Range Harga: Rp.{med.min_price} - Rp.{med.base_price}
+              <span className="mx-auto font-nunito font-black text-dblack text-lg">{med.name}</span>
+              <p className="mx-auto font-inter font-semibold text-dblack text-base">
+                IDR {med.min_price} - {med.base_price}
               </p>
               <Link
                 to={{
                   pathname: `/details/${med.slug}`,
                 }}
               >
-                <button
+                <button className="w-full bg-dpurple rounded-lg font-nunito font-extrabold text-base sm:text-lg text-white py-2"
                 >
-                  Details
+                  Lihat Detail
                 </button>
               </Link>
             </div>
