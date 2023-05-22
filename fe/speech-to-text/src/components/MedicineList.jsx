@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function MedicineList({ medicine }) {
   return (
-    <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 2xl:grid-cols-4 md:mt-5 gap-7 md:gap-11 p-2 px-8 sm:p-0">
+    <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 sm:mt-5 md:mt-5 gap-7 md:gap-11 p-2 px-8 sm:p-0">
       {medicine
         ? medicine.map((med) => (
             <div

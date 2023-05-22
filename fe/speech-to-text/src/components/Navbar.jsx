@@ -31,7 +31,7 @@ export default function Navbar() {
           className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
           aria-label="Sidebar"
         >
-          <div className="h-full px-3 py-4 overflow-y-auto bg-white mt-8">
+          <div className="h-full px-3 py-4 overflow-y-auto bg-white ">
             <div class="flex flex-col items-center mt-6 -mx-2">
               <img
                 class="object-cover w-24 h-24 mx-2 rounded-full"
