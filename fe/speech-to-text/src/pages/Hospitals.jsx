@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import HospitalList from "../components/HospitalList";
+import LandingPage from "../components/LandingPage";
 
 const Hospitals = () => {
   const [currentCity, setCurrentCity] = useState("");
@@ -77,21 +79,10 @@ const Hospitals = () => {
 
   return (
     <>
-      <div className="container">
-        <h2>Nearest Hospitals</h2>
+      <div className="min-h-screen w-full">
+        <LandingPage />
         <p>You are in {currentCity}</p>
-        <div>
-          {hospitals
-            ? hospitals
-                .sort((a, b) => a.distance - b.distance)
-                .map((h) => (
-                  <>
-                    <p>{h.display_name}</p>
-                    <p>Jarak : {h.distance.toFixed(2)} km</p>
-                  </>
-                ))
-            : null}
-        </div>
+        <HospitalList hospitals={hospitals}/>
       </div>
     </>
   );

@@ -37,15 +37,21 @@ app.get("/api/buy-medicine/products/details", async (req, res) => {
   }
 });
 
-app.get("/api/hospitals", async (req, res) => {
-  let { query } = req.body;
-
+app.put("/hospital/location", async (req, res) => {
   try {
-    const response = await axios.get(
+    const response = await axios.put(
       `https://magneto.api.halodoc.com/api/rumah-sakit/v1/hospitals/suggestions`,
+      {
+        city: req?.body?.city || null,
+        district: req?.body?.district || null,
+        region: req?.body?.region || null,
+        search_text: req?.body?.search || null,
+        per_page: 3,
+        types: ["provider_locations", "departments", "procedures"]
+      } 
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.json(response.data);
+    res.json(response.data.provider_locations);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
