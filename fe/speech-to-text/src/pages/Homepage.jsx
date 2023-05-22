@@ -4,6 +4,7 @@ import LandingPage from "../components/LandingPage";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
+
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const mic = new SpeechRecognition();
