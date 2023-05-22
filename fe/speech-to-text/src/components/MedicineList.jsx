@@ -1,31 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import { Link } from "react-router-dom"
 
 export default function MedicineList({ medicine }) {
-  const [medicineDetail, setMedicineDetail] = useState(null);
-
-  async function getMedicineDetail(slug) {
-    await axios
-      .get(`http://localhost:5000/api/buy-medicine/products/details`, {
-        params: {
-          query: slug,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setMedicineDetail(response.data);
-        // alert(response.data.description);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  let stateObj = null;
-  if (medicineDetail !== null) {
-    stateObj = { medicineDetail: medicineDetail };
-  }
 
   return (
     <div className="w-full h-full mt-3 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-2 px-7 ">
@@ -47,7 +23,6 @@ export default function MedicineList({ medicine }) {
               <Link
                 to={{
                   pathname: `/details/${med.slug}`,
-                  state: stateObj
                 }}
               >
                 <button
