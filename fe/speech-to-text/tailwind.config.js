@@ -14,9 +14,12 @@ module.exports = {
         dred: '#BD2B23',
         dblue: '#2733C7',
         dgreen: '#198961'
+      },
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
+        'nunito': ['Nunito Sans', 'sans-serif']
       }
     },
   },
   plugins: [],
 }
-
