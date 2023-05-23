@@ -84,7 +84,7 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="min-h-screen max-h-full w-full flex bg-dbg">
+      <div className="min-h-screen max-h-full w-full flex bg-dbg overflow-y-hidden">
         <Navbar />
         <div className="flex flex-col w-full h-full pt-5 md:pt-7">
         <LandingPage />

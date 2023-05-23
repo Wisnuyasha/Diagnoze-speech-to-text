@@ -2,7 +2,7 @@ import React from "react";
 
 export default function HospitalList({ hospitals }) {
   return (
-        <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 sm:mt-5 md:mt-5 gap-7 md:gap-11 p-2 px-8 sm:p-0">
+        <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 sm:mt-5 md:mt-5 gap-7 md:gap-11 p-2 px-8 sm:p-0 md:mr-16 md:ml-16 lg:ml-20">
         {hospitals
           ? hospitals
             .sort((a, b) => a.distance - b.distance)
