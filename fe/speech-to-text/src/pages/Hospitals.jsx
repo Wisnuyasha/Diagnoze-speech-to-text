@@ -80,12 +80,15 @@ const Hospitals = () => {
 
   return (
     <>
-      <div className="min-h-screen max-h-full w-full flex bg-dbg">
+      <div className="flex max-h-full min-h-screen w-full bg-dbg">
         <Navbar />
-        <div className="flex flex-col w-full h-full pt-5 md:pt-7">
-        <LandingPage />
-        <p className="font-nunito font-black text-2xl sm:text-3xl md:text-4xl text-dblack mb-2 sm:mb-3 mt-5">You are in <span className="text-2xl sm:text-3xl">{currentCity}</span></p>
-        <HospitalList hospitals={hospitals} />
+        <div className="flex h-full w-full flex-col pt-5 md:pt-7">
+          <LandingPage />
+          <p className="mb-2 mt-5 font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
+            You are in{" "}
+            <span className="text-2xl sm:text-3xl">{currentCity}</span>
+          </p>
+          <HospitalList hospitals={hospitals} />
         </div>
       </div>
     </>
