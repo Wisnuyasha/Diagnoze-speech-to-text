@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default function MedicineList({ medicine }) {
   return (
@@ -15,7 +15,9 @@ export default function MedicineList({ medicine }) {
                 alt={med.name}
                 className="w-40 mx-auto"
               />
-              <span className="mx-auto font-nunito font-black text-dblack text-lg">{med.name}</span>
+              <span className="mx-auto font-nunito font-black text-dblack text-lg">
+                {med.name}
+              </span>
               <p className="mx-auto font-inter font-semibold text-dblack text-base">
                 IDR {med.min_price} - {med.base_price}
               </p>
@@ -24,8 +26,7 @@ export default function MedicineList({ medicine }) {
                   pathname: `/details/${med.slug}`,
                 }}
               >
-                <button className="w-full bg-dpurple rounded-lg font-nunito font-extrabold text-base sm:text-lg text-white py-2"
-                >
+                <button className="w-full bg-dpurple rounded-lg font-nunito font-extrabold text-base sm:text-lg text-white py-2">
                   Lihat Detail
                 </button>
               </Link>
