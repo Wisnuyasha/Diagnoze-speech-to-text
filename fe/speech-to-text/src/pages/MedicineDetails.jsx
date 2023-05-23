@@ -6,8 +6,31 @@ import axios from "axios";
 
 export default function MedicineDetail() {
   const [medicineDetail, setMedicineDetail] = useState(null);
-  const [category, setCategory] = useState([])
+  const [type, setType] = useState('deskripsi')
   const { id } = useParams();
+
+  function TypeComponent({ title, description }) {
+    return (
+      <>
+        <span className="font-nunito font-extrabold text-center lg:text-start text-dblack mt-3 text-2xl sm:text-3xl xl:text-4xl">{title}</span>
+        <p className="text-justify font-inter font-medium text-sm sm:text-base xl:text-lg text-dblack mt-1 sm:mt-2 md:mt-3 lg:mt-1 tracking-tight leading-tight">{description}</p>
+      </>
+    )
+  }
+
+  let renderDiv;
+
+  if (type === 'deskripsi') {
+    renderDiv = medicineDetail ? <TypeComponent title="Deskripsi" description={medicineDetail.description} /> : null;
+  } else if (type === 'indikasi') {
+    renderDiv = medicineDetail ? <TypeComponent title="Indikasi Umum" description={medicineDetail.general_indication} /> : null;
+  } else if (type === 'efek') {
+    renderDiv = medicineDetail ? <TypeComponent title="Efek Samping" description={medicineDetail.side_effects} /> : null;
+  } else if (type === 'petunjuk') {
+    renderDiv = medicineDetail ? <TypeComponent title="Petunjuk Penggunaan" description={medicineDetail.how_to_use} /> : null;
+  } else {
+    renderDiv = medicineDetail ? <TypeComponent title="Deskripsi" description={medicineDetail.description} /> : null;
+  }
 
   useEffect(() => {
     async function getMedicineDetail() {
@@ -28,6 +51,8 @@ export default function MedicineDetail() {
       getMedicineDetail();
   }, []);
 
+  // const api = if()
+
   return (
     <div className="min-h-screen max-h-full w-full flex items-center bg-dbg">
       <Navbar />
@@ -39,19 +64,26 @@ export default function MedicineDetail() {
           <div className="flex flex-col w-full h-full items-center lg:flex-row bg-white p-8 sm:p-10 md:p-14 mt-8 lg:gap-2 xl:gap-6 rounded-[2rem]">
             <img src={medicineDetail.image_url} alt={medicineDetail.name} width="400" className=" mx-auto" />
             <div className="flex flex-col">
-              <span className="font-nunito font-extrabold text-center lg:text-start text-dblack mt-3 text-2xl sm:text-3xl xl:text-4xl">Deskripsi</span>
-              <p className="text-justify font-inter font-medium text-sm sm:text-base xl:text-lg text-dblack mt-1 sm:mt-2 md:mt-3 lg:mt-1 tracking-tight leading-tight">{medicineDetail.description}</p>
+              {renderDiv}
               <div className="flex flex-wrap gap-3 mt-4">
-                <button className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
+                <button 
+                  onClick={() => setType('deskripsi')}
+                  className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Deskripsi
                 </button>
-                <button className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
+                <button
+                  onCLick={() => setType('indikasi')} 
+                  className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Indikasi Umum
                 </button>
-                <button className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
+                <button
+                  onCLick={() => setType('efek')}  
+                  className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Efek Samping
                 </button>
-                <button className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
+                <button
+                  onCLick={() => setType('petunjuk')}  
+                  className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Petunjuk Penggunaan
                 </button>
               </div>

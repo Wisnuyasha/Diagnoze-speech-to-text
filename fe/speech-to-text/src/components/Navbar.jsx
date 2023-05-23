@@ -9,7 +9,7 @@ export default function Navbar() {
           data-drawer-toggle="default-sidebar"
           aria-controls="default-sidebar"
           type="button"
-          className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-800 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+          className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-800 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none  "
         >
           <span className="sr-only">Open sidebar</span>
           <svg
@@ -33,12 +33,8 @@ export default function Navbar() {
         >
           <div className="h-full px-3 py-4 overflow-y-auto bg-white ">
             <div class="flex flex-col items-center mt-6 -mx-2">
-              <img
-                class="object-cover w-24 h-24 mx-2 rounded-full"
-                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                alt="avatar"
-              ></img>
-              <p class="mx-2 mt-2 font-extrabold text-3xl text-gray-800 ">
+              <div className="w-28 h-28 bg-dpurple rounded-full"></div>
+              <p class="mx-2 mt-2 font-nunito font-black text-dpurple text-3xl">
                 Diagno.ze
               </p>
             </div>
@@ -61,28 +57,7 @@ export default function Navbar() {
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <span className="ml-3 font-nunito text-xl">Dashboard</span>
-                </a>
-              </li>
-              <li className="border-4 rounded-full flex items-center hover:bg-[#45486E]">
-                <a
-                  href="#"
-                  className="flex items-center text-center justify-center p-4 text-black hover:text-white rounded-lg "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="w-8 h-8"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M4.5 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5h-.75V3.75a.75.75 0 000-1.5h-15zM9 6a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm-.75 3.75A.75.75 0 019 9h1.5a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM9 12a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H9zm3.75-5.25A.75.75 0 0113.5 6H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM13.5 9a.75.75 0 000 1.5H15A.75.75 0 0015 9h-1.5zm-.75 3.75a.75.75 0 01.75-.75H15a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM9 19.5v-2.25a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-4.5A.75.75 0 019 19.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-
-                  <span className="ml-3 font-nunito text-xl">Hospital</span>
+                  <span className="ml-3 font-nunito text-xl">Diagnoze</span>
                 </a>
               </li>
               <li className="border-4 rounded-full flex items-center hover:bg-[#45486E]">
