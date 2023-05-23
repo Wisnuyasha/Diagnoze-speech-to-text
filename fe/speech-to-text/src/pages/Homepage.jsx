@@ -87,7 +87,7 @@ const Homepage = () => {
     <>
       <div className="flex max-h-full min-h-screen w-full bg-dbg">
         <Navbar />
-        <div className="flex h-full w-full flex-col pt-5 md:pt-7">
+        <div className="flex h-full w-full flex-col">
           <LandingPage />
           {/* Diagnoze bar*/}
           <div className="flex h-fit w-full flex-col border-black p-6 sm:px-9 md:px-11 md:pt-8">

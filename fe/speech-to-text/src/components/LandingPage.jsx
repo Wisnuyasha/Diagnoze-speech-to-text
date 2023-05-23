@@ -2,7 +2,7 @@ import React from "react";
 
 export default function LandingPage() {
   return (
-    <div className="flex h-fit w-full flex-col gap-5 px-10 sm:px-16 md:px-20">
+    <div className="flex h-fit w-full flex-col gap-5 px-10 sm:px-16 md:px-20  pt-5 md:pt-7 lg:pt-10 xl:pt-12">
       <div className="flex flex-col">
         <span className="font-nunito text-3xl font-black text-dblack sm:text-4xl md:text-5xl">
           Hi, Putih!
