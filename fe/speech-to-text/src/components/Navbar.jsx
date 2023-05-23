@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <>
-      <div className="w-1/4 xl:w-1/3 hidden lg:block">
+      <div className="hidden w-1/4 lg:block xl:w-1/3">
         <button
           data-drawer-target="default-sidebar"
           data-drawer-toggle="default-sidebar"
           aria-controls="default-sidebar"
           type="button"
-          className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-800 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+          className="ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 sm:hidden "
         >
           <span className="sr-only">Open sidebar</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-8 h-8"
+            className="h-8 w-8"
           >
             <path
               fill-rule="evenodd"
@@ -29,28 +29,28 @@ export default function Navbar() {
 
         <aside
           id="default-sidebar"
-          className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+          className="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
           aria-label="Sidebar"
         >
-          <div className="h-full px-3 py-4 overflow-y-auto bg-white ">
-            <div class="flex flex-col items-center mt-6 -mx-2">
-              <div className="w-28 h-28 bg-dpurple rounded-full"></div>
-              <p class="mx-2 mt-2 font-nunito font-black text-dpurple text-3xl">
+          <div className="h-full overflow-y-auto bg-white px-3 py-4 ">
+            <div class="-mx-2 mt-6 flex flex-col items-center">
+              <div className="h-28 w-28 rounded-full bg-dpurple"></div>
+              <p class="mx-2 mt-2 font-nunito text-3xl font-black text-dpurple">
                 Diagno.ze
               </p>
             </div>
 
-            <ul className="space-y-2 font-medium mt-8">
-              <li className="border-4 rounded-full flex items-center bg-[#45486E]">
+            <ul className="mt-8 space-y-2 font-medium">
+              <li className="flex items-center rounded-full border-4 bg-[#45486E]">
                 <p
                   href="#"
-                  className="flex items-center text-center justify-center p-4 text-white rounded-lg "
+                  className="flex items-center justify-center rounded-lg p-4 text-center text-white "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="w-8 h-8"
+                    className="h-8 w-8"
                   >
                     <path
                       fill-rule="evenodd"
@@ -66,16 +66,16 @@ export default function Navbar() {
                   pathname: `/hospitals`,
                 }}
               >
-                <li className="border-4 rounded-full flex items-center hover:bg-[#45486E]">
+                <li className="flex items-center rounded-full border-4 hover:bg-[#45486E]">
                   <p
                     href="#"
-                    className="flex items-center text-center justify-center p-4 text-black hover:text-white rounded-lg "
+                    className="flex items-center justify-center rounded-lg p-4 text-center text-black hover:text-white "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      class="w-8 h-8"
+                      class="h-8 w-8"
                     >
                       <path
                         fill-rule="evenodd"
@@ -89,16 +89,16 @@ export default function Navbar() {
                 </li>
               </Link>
 
-              <li className="border-4 rounded-full flex items-center hover:bg-[#45486E]">
+              <li className="flex items-center rounded-full border-4 hover:bg-[#45486E]">
                 <p
                   href="#"
-                  className="flex items-center text-center justify-center p-4 text-black hover:text-white rounded-lg "
+                  className="flex items-center justify-center rounded-lg p-4 text-center text-black hover:text-white "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    class="w-6 h-6"
+                    class="h-6 w-6"
                   >
                     <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
                     <path

@@ -85,27 +85,27 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="min-h-screen max-h-full w-full flex bg-dbg">
+      <div className="flex max-h-full min-h-screen w-full bg-dbg">
         <Navbar />
-        <div className="flex flex-col w-full h-full pt-5 md:pt-7">
+        <div className="flex h-full w-full flex-col pt-5 md:pt-7">
           <LandingPage />
           {/* Diagnoze bar*/}
-          <div className="w-full flex flex-col border-black h-fit p-6 sm:px-9 md:px-11 md:pt-8">
-            <span className="font-nunito font-black text-2xl sm:text-3xl md:text-4xl text-dblack mb-2 sm:mb-3">
+          <div className="flex h-fit w-full flex-col border-black p-6 sm:px-9 md:px-11 md:pt-8">
+            <span className="mb-2 font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
               Diagnoze
             </span>
             <div className="flex items-center md:gap-6">
-              <div className="bg-white w-full flex h-10 md:h-12 xl:h-14 rounded-lg items-center px-3 pl-4 xl:px-5">
+              <div className="flex h-10 w-full items-center rounded-lg bg-white px-3 pl-4 md:h-12 xl:h-14 xl:px-5">
                 {isListen ? (
-                  <div className="flex justify-between items-center w-full">
-                    <span className="text-dblack font-bold lg:text-lg text-base font-nunito">
+                  <div className="flex w-full items-center justify-between">
+                    <span className="font-nunito text-base font-bold text-dblack lg:text-lg">
                       {diagnoze}
                     </span>
                     <div className="flex gap-4">
                       <button onClick={() => handleClearDiagnoze()}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="w-5 h-5"
+                          className="h-5 w-5"
                           viewBox="0 0 20 20"
                           fill="none"
                         >
@@ -129,7 +129,7 @@ const Homepage = () => {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="w-7 h-7"
+                          className="h-7 w-7"
                           viewBox="0 0 35 35"
                           fill="none"
                         >
@@ -158,13 +158,13 @@ const Homepage = () => {
                   </div>
                 ) : (
                   <div>
-                    <span className="text-dblack text-base lg:text-lg font-nunito font-bold block md:hidden">
+                    <span className="block font-nunito text-base font-bold text-dblack md:hidden lg:text-lg">
                       Tekan tombol mikrofon
                     </span>
-                    <span className="text-dblack text-base lg:text-lg font-nunito font-bold hidden md:block lg:hidden">
+                    <span className="hidden font-nunito text-base font-bold text-dblack md:block lg:hidden lg:text-lg">
                       Tekan tombol mikrofon dan sebutkan gejala yang kamu alami
                     </span>
-                    <span className="text-dblack text-base xl:text-lg font-nunito font-bold hidden lg:block">
+                    <span className="hidden font-nunito text-base font-bold text-dblack lg:block xl:text-lg">
                       Tekan tombol mikrofon disebelah kanan dan sebutkan gejala
                       yang kamu alami
                     </span>
@@ -175,7 +175,7 @@ const Homepage = () => {
                 {isListen ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden md:block h-12 xl:h-14 transition scale-125 duration-300 delay-150 ease-in-out"
+                    className="hidden h-12 scale-125 transition delay-150 duration-300 ease-in-out md:block xl:h-14"
                     viewBox="0 0 56 56"
                     fill="none"
                   >
@@ -194,7 +194,7 @@ const Homepage = () => {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden md:block h-12 xl:h-14 transition duration-300 delay-150 ease-in-out"
+                    className="hidden h-12 transition delay-150 duration-300 ease-in-out md:block xl:h-14"
                     viewBox="0 0 56 56"
                     fill="none"
                   >
@@ -221,13 +221,13 @@ const Homepage = () => {
                 )}
               </button>
             </div>
-            <div class="flex flex-col justify-center items-center text-center">
-              <div className="block md:hidden fixed bottom-12 mx-auto">
+            <div class="flex flex-col items-center justify-center text-center">
+              <div className="fixed bottom-12 mx-auto block md:hidden">
                 <button onClick={() => setIsListen((prevState) => !prevState)}>
                   {isListen ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="rounded-full w-20 h-20 transition scale-125 duration-300 delay-150 ease-in-out"
+                      className="h-20 w-20 scale-125 rounded-full transition delay-150 duration-300 ease-in-out"
                       viewBox="0 0 56 56"
                       fill="none"
                     >
@@ -246,7 +246,7 @@ const Homepage = () => {
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="rounded-full w-20 h-20 transition duration-300 delay-150 ease-in-out"
+                      className="h-20 w-20 rounded-full transition delay-150 duration-300 ease-in-out"
                       viewBox="0 0 56 56"
                       fill="none"
                     >
