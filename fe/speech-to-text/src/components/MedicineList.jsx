@@ -1,25 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default function MedicineList({ medicine }) {
   return (
-    <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-3 2xl:grid-cols-4 md:mt-5 gap-7 md:gap-11 p-2 px-8 sm:p-0">
+    <div className="mt-3 grid h-full w-full grid-cols-1 gap-7 p-2 px-8 sm:mt-5 sm:grid-cols-2 sm:p-0 md:mt-5 md:gap-11 lg:grid-cols-3">
       {medicine
         ? medicine.map((med) => (
             <div
-              className=" p-4 sm:p-5 md:p-6 bg-white shadow-lg flex flex-col gap-2 rounded-2xl "
+              className=" flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-lg sm:p-5 md:p-6 "
               key={med.external_id}
             >
 
 
               <img
                 src={med.image_url}
-                alt={med.first_name}
-                className="w-40 mx-auto"
-              />
 
-              <span className="mx-auto font-nunito font-black text-dblack text-lg">{med.name}</span>
-              <p className="mx-auto font-inter font-semibold text-dblack text-base">
+                alt={med.name}
+                className="mx-auto w-40"
+              />
+              <span className="mx-auto font-nunito text-lg font-black text-dblack">
+                {med.name}
+              </span>
+              <p className="mx-auto font-inter text-base font-semibold text-dblack">
+
                 IDR {med.min_price} - {med.base_price}
               </p>
 
@@ -28,8 +31,7 @@ export default function MedicineList({ medicine }) {
                   pathname: `/details/${med.slug}`,
                 }}
               >
-                <button className="w-full bg-dpurple rounded-lg font-nunito font-extrabold text-base sm:text-lg text-white py-2"
-                >
+                <button className="w-full rounded-lg bg-dpurple py-2 font-nunito text-base font-extrabold text-white sm:text-lg">
                   Lihat Detail
                 </button>
               </Link>

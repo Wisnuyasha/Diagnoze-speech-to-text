@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import HospitalList from "../components/HospitalList";
 import LandingPage from "../components/LandingPage";
 import Navbar from "../components/Navbar";
+import { PharmacyList } from "../components/PharmacyList";
 
-const Hospitals = () => {
+export default function Pharmacy() {
   const [currentCity, setCurrentCity] = useState("");
-  const [hospitals, setHospitals] = useState([]);
+  const [pharmacy, setPharmacy] = useState([]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -18,7 +18,7 @@ const Hospitals = () => {
 
   useEffect(() => {
     if (currentCity) {
-      searchNearestHospitals();
+      searchNearestPharmacy();
     }
   }, [currentCity]);
 
@@ -52,43 +52,40 @@ const Hospitals = () => {
       .then((response) => {
         const city = response.data.display_name;
 
-        searchNearestHospitals(lat, long);
+        searchNearestPharmacy(lat, long);
         setCurrentCity(city);
 
         return long;
       });
   };
 
-  const searchNearestHospitals = (lat, long) => {
+  const searchNearestPharmacy = (lat, long) => {
     getCurrentCity();
 
     axios
       .get(
-        `https://nominatim.openstreetmap.org/search.php?q=hospital+in+${currentCity}&format=json&bounded=1&viewbox=${
+        `https://nominatim.openstreetmap.org/search.php?q=pharmacy+in+${currentCity}&format=json&bounded=1&viewbox=${
           long - 0.5
         },${lat - 0.5},${long + 0.5},${lat + 0.5}&limit=10`
       )
       .then((response) => {
-        let hospital = response.data;
-        hospital.forEach((h) => {
-          h.distance = getDistance(lat, long, h.lat, h.lon);
+        let pharms = response.data;
+        pharms.forEach((p) => {
+          p.distance = getDistance(lat, long, p.lat, p.lon);
         });
-        setHospitals(hospital);
-        console.log(hospitals);
+        setPharmacy(pharms);
       });
   };
-
   return (
-    <>
-      <div className="flex max-h-full min-h-screen w-full bg-dbg">
-        <Navbar />
-        <div className="flex h-full w-full flex-col">
-          <LandingPage />
-          <div className="mx-6 flex flex-col lg:mx-10">
-            <p className="mb-2 mt-5 text-center font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
-              You are in
-            </p>
-            {currentCity ? (
+    <div className="flex max-h-full min-h-screen w-full bg-dbg">
+      <Navbar />
+      <div className="flex h-full w-full flex-col">
+        <LandingPage />
+        <div className="flex flex-col mx-6 lg:mx-10">
+          <p className="mb-2 mt-5 font-nunito text-2xl text-center font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
+            You are in
+          </p>
+          {currentCity ? (
               <span className="text-center font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
                 {currentCity}
               </span>
@@ -97,12 +94,9 @@ const Hospitals = () => {
                 Sedang Mencari Lokasimu...
               </span>
             )}
-            <HospitalList hospitals={hospitals} />
-          </div>
+          <PharmacyList pharmacy={pharmacy} />
         </div>
       </div>
-    </>
+    </div>
   );
-};
-
-export default Hospitals;
+}

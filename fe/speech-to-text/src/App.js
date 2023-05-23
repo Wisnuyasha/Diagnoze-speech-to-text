@@ -1,7 +1,8 @@
 import Homepage from "./pages/Homepage";
 import MedicineDetails from "./pages/MedicineDetails";
 import Hospitals from "./pages/Hospitals";
-import Navbar from "./components/Navbar";
+import Pharmacy from "./pages/Pharmacy";
+import Doctors from "./pages/Doctors";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -12,11 +13,9 @@ export default function App() {
           <Routes>
             <Route path={"/"} element={<Homepage />} />
             <Route path={"/hospitals"} element={<Hospitals />} />
-            <Route
-            exact
-            path="/details/:id"
-            element={<MedicineDetails />} 
-          />
+            <Route path={"/pharmacy"} element={<Pharmacy />} />
+            <Route path={"/doctors"} element={<Doctors />} />
+            <Route exact path="/details/:id" element={<MedicineDetails />} />
           </Routes>
         </Router>
       </div>
