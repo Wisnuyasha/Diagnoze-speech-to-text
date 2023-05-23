@@ -3,7 +3,9 @@ import React from "react";
 export default function Navbar() {
   return (
     <>
+
       <div className="hidden w-1/3 rounded-xl lg:block">
+
         {/* <button
           data-drawer-target="default-sidebar"
           data-drawer-toggle="default-sidebar"
@@ -28,6 +30,7 @@ export default function Navbar() {
 
         <aside
           id="default-sidebar"
+
           className="fixed h-full w-1/4 -translate-x-full rounded-xl transition-transform sm:translate-x-0"
           aria-label="Sidebar"
         >
@@ -153,6 +156,7 @@ export default function Navbar() {
                   </a>
                 </li>
               </ul>
+
             </div>
           </div>
         </aside>

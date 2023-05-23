@@ -10,8 +10,11 @@ export default function MedicineList({ medicine }) {
               className=" flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-lg sm:p-5 md:p-6 "
               key={med.external_id}
             >
+
+
               <img
                 src={med.image_url}
+
                 alt={med.name}
                 className="mx-auto w-40"
               />
@@ -19,8 +22,10 @@ export default function MedicineList({ medicine }) {
                 {med.name}
               </span>
               <p className="mx-auto font-inter text-base font-semibold text-dblack">
+
                 IDR {med.min_price} - {med.base_price}
               </p>
+
               <Link
                 to={{
                   pathname: `/details/${med.slug}`,
