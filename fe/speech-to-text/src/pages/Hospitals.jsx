@@ -80,11 +80,11 @@ const Hospitals = () => {
 
   return (
     <>
-      <div className="min-h-screen max-h-full w-full flex bg-dbg overflow-y-hidden">
+      <div className="min-h-screen max-h-full w-full flex bg-dbg">
         <Navbar />
         <div className="flex flex-col w-full h-full pt-5 md:pt-7">
         <LandingPage />
-        <p className="font-nunito font-black text-2xl sm:text-3xl md:text-4xl text-dblack mb-2 sm:mb-3 mt-5 mx-4 ml-10 sm:ml-14 md:ml-16 lg:ml-20">You are in <span className="text-2xl sm:text-3xl">{currentCity}</span></p>
+        <p className="font-nunito font-black text-2xl sm:text-3xl md:text-4xl text-dblack mb-2 sm:mb-3 mt-5">You are in <span className="text-2xl sm:text-3xl">{currentCity}</span></p>
         <HospitalList hospitals={hospitals} />
         </div>
       </div>
