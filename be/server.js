@@ -37,6 +37,21 @@ app.get("/api/buy-medicine/products/details", async (req, res) => {
   }
 });
 
+app.get("/api/alo/medicine/search", async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const response = await axios.get(
+      `https://www.alodokter.com/api/aloshop/products?term=${query}`
+    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 app.put("/hospital/location", async (req, res) => {
   try {
     const response = await axios.put(

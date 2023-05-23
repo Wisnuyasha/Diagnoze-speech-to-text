@@ -82,7 +82,7 @@ export default function MedicineDetail() {
   // const api = if()
 
   return (
-    <div className="flex max-h-full min-h-screen w-full items-center bg-dbg">
+    <div className="flex max-h-full min-h-screen w-full bg-dbg">
       <Navbar />
       {medicineDetail ? (
         <div className="flex h-full w-full flex-col p-8 sm:p-14 lg:p-20 lg:pl-10">
@@ -126,9 +126,12 @@ export default function MedicineDetail() {
               </div>
             </div>
           </div>
-          <div className="mx-auto mt-6 h-fit w-fit rounded-lg bg-dpurple px-12 py-1 font-nunito font-extrabold text-white lg:px-16 lg:py-2 lg:text-lg xl:mt-10 xl:px-20 xl:py-3 xl:text-xl">
+          <a
+            href="/"
+            className="mx-auto mt-6 h-fit w-fit rounded-lg bg-dpurple px-12 py-1 font-nunito font-extrabold text-white lg:px-16 lg:py-2 hover:scale-110 transition duration-300 delay-150 hover:ease-in-out lg:text-lg xl:mt-10 xl:px-20 xl:py-3 xl:text-xl"
+          >
             Kembali
-          </div>
+          </a>
         </div>
       ) : (
         <p>Loading...</p>
