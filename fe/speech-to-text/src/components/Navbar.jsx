@@ -42,7 +42,7 @@ export default function Navbar() {
 
             <ul className="space-y-2 font-medium mt-8">
               <li className="border-4 rounded-full flex items-center bg-[#45486E]">
-                <a
+                <p
                   href="#"
                   className="flex items-center text-center justify-center p-4 text-white rounded-lg "
                 >
@@ -59,7 +59,7 @@ export default function Navbar() {
                     />
                   </svg>
                   <span className="ml-3 font-nunito text-xl">Diagnoze</span>
-                </a>
+                </p>
               </li>
               <Link
                   to={{
@@ -67,7 +67,7 @@ export default function Navbar() {
                   }}
                 >
                                 <li className="border-4 rounded-full flex items-center hover:bg-[#45486E]">
-                <a
+                <p
                   href="#"
                   className="flex items-center text-center justify-center p-4 text-black hover:text-white rounded-lg "
                 >
@@ -85,12 +85,12 @@ export default function Navbar() {
                   </svg>
 
                   <span className="ml-3 font-nunito text-xl">Hospital</span>
-                </a>
+                </p>
               </li>
                 </Link>
 
               <li className="border-4 rounded-full flex items-center hover:bg-[#45486E]">
-                <a
+                <p
                   href="#"
                   className="flex items-center text-center justify-center p-4 text-black hover:text-white rounded-lg "
                 >
@@ -109,7 +109,7 @@ export default function Navbar() {
                   </svg>
 
                   <span className="ml-3 font-nunito text-xl">Products</span>
-                </a>
+                </p>
               </li>
             </ul>
           </div>

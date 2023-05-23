@@ -49,7 +49,7 @@ export default function MedicineDetail() {
           });
       }
       getMedicineDetail();
-  }, []);
+  }, [id]);
 
   // const api = if()
 

@@ -1,7 +1,7 @@
 import Homepage from "./pages/Homepage";
 import MedicineDetails from "./pages/MedicineDetails";
 import Hospitals from "./pages/Hospitals";
-import Navbar from "./components/Navbar";
+import Pharmacy from "./pages/Pharmacy";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -9,10 +9,10 @@ export default function App() {
     <>
       <div className="App">
         <Router>
-          {/* <Navbar/> */}
           <Routes>
             <Route path={"/"} element={<Homepage />} />
             <Route path={"/hospitals"} element={<Hospitals />} />
+            <Route path={"/pharmacy"} element={<Pharmacy />} />
             <Route
             exact
             path="/details/:id"
