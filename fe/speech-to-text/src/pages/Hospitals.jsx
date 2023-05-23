@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import HospitalList from "../components/HospitalList";
 import LandingPage from "../components/LandingPage";
+import Navbar from "../components/Navbar";
 
 const Hospitals = () => {
   const [currentCity, setCurrentCity] = useState("");
@@ -49,7 +50,7 @@ const Hospitals = () => {
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=jsonv2`
       )
       .then((response) => {
-        const city = response.data.address.city;
+        const city = response.data.display_name;
 
         searchNearestHospitals(lat, long);
         setCurrentCity(city);
@@ -79,10 +80,13 @@ const Hospitals = () => {
 
   return (
     <>
-      <div className="min-h-screen w-full">
+      <div className="min-h-screen max-h-full w-full flex bg-dbg">
+        <Navbar />
+        <div className="flex flex-col w-full h-full pt-5 md:pt-7">
         <LandingPage />
-        <p>You are in {currentCity}</p>
+        <p className="font-nunito font-black text-2xl sm:text-3xl md:text-4xl text-dblack mb-2 sm:mb-3 mt-5">You are in <span className="text-2xl sm:text-3xl">{currentCity}</span></p>
         <HospitalList hospitals={hospitals}/>
+        </div>
       </div>
     </>
   );

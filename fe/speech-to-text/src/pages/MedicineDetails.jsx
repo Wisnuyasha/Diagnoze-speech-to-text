@@ -72,17 +72,17 @@ export default function MedicineDetail() {
                   Deskripsi
                 </button>
                 <button
-                  onCLick={() => setType('indikasi')} 
+                  onClick={() => setType('indikasi')} 
                   className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Indikasi Umum
                 </button>
                 <button
-                  onCLick={() => setType('efek')}  
+                  onClick={() => setType('efek')}  
                   className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Efek Samping
                 </button>
                 <button
-                  onCLick={() => setType('petunjuk')}  
+                  onClick={() => setType('petunjuk')}  
                   className="font-nunito font-extrabold text-lg bg-white rounded-full border-dpurple text-dpurple border-2 hover:bg-dpurple hover:delay-100 hover:text-white transition hover:scale-110 hover:duration-300 hover:ease-in-out py-1 px-6 w-fit h-fit">
                   Petunjuk Penggunaan
                 </button>

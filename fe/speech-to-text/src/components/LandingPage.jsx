@@ -4,7 +4,7 @@ export default function LandingPage() {
   return (
     <div className="w-full flex flex-col gap-5 h-fit px-10 sm:px-16 md:px-20">
       <div className="flex flex-col">
-        <span className="font-black font-nunito text-dblack text-3xl sm:text-4xl md:text-5xl">Hi, Putih!</span>
+        <span className="font-black font-nunito text-dblack text-3xl sm:text-4xl md:text-5xl">Hi, Doc!</span>
         <span className="font-inter font-bold text-dgrey text-sm sm:text-base md:text-lg">Welcome to Diagno.ze</span>
       </div>
       <div className="bg-dpurple rounded-3xl lg:rounded-[2.3rem] p-4 px-6 sm:px-10 sm:py-8 md:px-11 md:py-9 xl:px-14 xl:pt-12">
