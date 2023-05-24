@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
@@ -126,12 +126,14 @@ export default function MedicineDetail() {
               </div>
             </div>
           </div>
-          <a
-            href="/"
+          <Link
+            to={{
+              pathname: '/',
+            }}
             className="mx-auto mt-6 h-fit w-fit rounded-lg bg-dpurple px-12 py-1 font-nunito font-extrabold text-white lg:px-16 lg:py-2 hover:scale-110 transition duration-300 delay-150 hover:ease-in-out lg:text-lg xl:mt-10 xl:px-20 xl:py-3 xl:text-xl"
           >
             Kembali
-          </a>
+          </Link>
         </div>
       ) : (
         <p>Loading...</p>
