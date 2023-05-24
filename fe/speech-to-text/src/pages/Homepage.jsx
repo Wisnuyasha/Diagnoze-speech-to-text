@@ -9,6 +9,8 @@ import { TrashIcon } from "../assets/Diagnoze/TrashIcon";
 import SearchIcon from "../assets/Diagnoze/SearchIcon";
 import UnmuteIcon from "../assets/Diagnoze/UnmuteIcon";
 import MuteIcon from "../assets/Diagnoze/MuteIcon";
+import MobileUnmuteIcon from "../assets/Diagnoze/MobileUnmuteIcon";
+import MobileMuteIcon from "../assets/Diagnoze/MobileMuteIcon";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -182,12 +184,12 @@ const Homepage = () => {
             <div class="flex flex-col items-center justify-center text-center">
               <div className="fixed bottom-12 mx-auto block md:hidden">
                 <button onClick={() => setIsListen((prevState) => !prevState)}>
-                  {isListen ? <UnmuteIcon /> : <MuteIcon />}
+                  {isListen ? <MobileUnmuteIcon /> : <MobileMuteIcon />}
                 </button>
               </div>
             </div>
 
-            <div className="mt-4 flex h-fit w-full justify-center gap-4 pr-16">
+            <div className="mt-4 flex h-fit w-full justify-center gap-4 lg:pr-16">
               <button
                 onClick={() => setCategory("price")}
                 className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
