@@ -11,7 +11,7 @@ app.get("/api/buy-medicine/products/search", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `https://www.alodokter.com/api/aloshop/products?term=${query}`
+      `https://magneto.api.halodoc.com/api/v1/buy-medicine/products/search/${query}`
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(response.data);
