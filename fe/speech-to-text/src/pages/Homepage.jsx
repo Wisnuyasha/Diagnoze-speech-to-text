@@ -30,6 +30,8 @@ const Homepage = () => {
   const [medicineRating, setMedicineRating] = useState([]);
   // const [med, setMed] = useState([]);
   const [category, setCategory] = useState("");
+  const [sortPriceAsc, setSortPriceAsc] = useState(true);
+  const [sortRatingAsc, setSortRatingAsc] = useState(true);
 
   // async function getData(query) {
   //   await axios
@@ -62,7 +64,8 @@ const Homepage = () => {
 
         if (category === "price") {
           const priceSort = api.sort((a, b) => {
-            return b.price.amount - a.price.amount;
+            // Mengubah cara pengurutan berdasarkan nilai sortPriceAsc
+            return sortPriceAsc ? a.price.amount - b.price.amount : b.price.amount - a.price.amount;
           });
           console.log(priceSort);
           setMedicinePrice(priceSort);
@@ -76,7 +79,8 @@ const Homepage = () => {
             const isBflot = parseFloat(b.rating);
             if (isNaN(isAflot)) return 1;
             if (isNaN(isBflot)) return -1;
-            return isBflot - isAflot;
+            // Mengubah cara pengurutan berdasarkan nilai sortRatingAsc
+            return sortRatingAsc ? isAflot - isBflot : isBflot - isAflot;
           });
           console.log(ratingSort);
           setMedicineRating(ratingSort);
@@ -156,6 +160,16 @@ const Homepage = () => {
   }
 
   const handleSortCategory = async (category) => {
+    if (category === "price") {
+      // Mengubah nilai sortPriceAsc jika category adalah 'price'
+      setSortPriceAsc((prev) => !prev);
+    }
+
+    if (category === "rating") {
+      // Mengubah nilai sortRatingAsc jika category adalah 'rating'
+      setSortRatingAsc((prev) => !prev);
+    }
+
     setCategory(category);
     await getMedicine(savedDiagnoze, category);
   };
@@ -223,17 +237,17 @@ const Homepage = () => {
 
             <div className="mt-4 flex h-fit w-full justify-center gap-4 lg:pr-16">
               <button
-                onClick={() => handleSortCategory("price")}
-                className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
-              >
-                Price
-              </button>
-              <button
-                onClick={() => handleSortCategory("rating")}
-                className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
-              >
-                Rating
-              </button>
+          onClick={() => handleSortCategory("price")}
+          className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
+        >
+          Price {sortPriceAsc ? 'Ascending' : 'Descending'}
+        </button>
+        <button
+          onClick={() => handleSortCategory("rating")}
+          className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
+        >
+          Rating {sortRatingAsc ? 'Ascending' : 'Descending'}
+        </button>
             </div>
             {categoryRender}
             {/* <MedicineListAlo medicine={medicine} />
