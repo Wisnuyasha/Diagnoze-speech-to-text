@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import DoctorsList from "../components/DoctorsList";
+import DoctorsList from "../components/Doctors/DoctorsList";
 
-import LandingPage from "../components/LandingPage";
+import LandingPage from "../components/Layouts/LandingPage";
 import axios from "axios";
-import Navbar from "../components/Navbar";
-
+import Navbar from "../components/Layouts/Navbar";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -104,16 +103,13 @@ const Homepage = () => {
                 {isListen ? (
                   <div className="flex w-full items-center justify-between">
                     <span className="font-nunito text-base font-bold text-dblack lg:text-lg">
-
                       {diagnoze}
                     </span>
                     <div className="flex gap-4">
                       <button onClick={() => handleClearDiagnoze()}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-
                           className="h-5 w-5"
-
                           viewBox="0 0 20 20"
                           fill="none"
                         >
@@ -137,9 +133,7 @@ const Homepage = () => {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-
                           className="h-7 w-7"
-
                           viewBox="0 0 35 35"
                           fill="none"
                         >
@@ -168,7 +162,6 @@ const Homepage = () => {
                   </div>
                 ) : (
                   <div>
-
                     <span className="block font-nunito text-base font-bold text-dblack md:hidden lg:text-lg">
                       Tekan tombol mikrofon
                     </span>
@@ -176,7 +169,6 @@ const Homepage = () => {
                       Tekan tombol mikrofon dan sebutkan gejala yang kamu alami
                     </span>
                     <span className="hidden font-nunito text-base font-bold text-dblack lg:block xl:text-lg">
-
                       Tekan tombol mikrofon disebelah kanan dan sebutkan gejala
                       yang kamu alami
                     </span>
@@ -187,9 +179,7 @@ const Homepage = () => {
                 {isListen ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-
                     className="hidden h-12 scale-125 transition delay-150 duration-300 ease-in-out md:block xl:h-14"
-
                     viewBox="0 0 56 56"
                     fill="none"
                   >
@@ -208,9 +198,7 @@ const Homepage = () => {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-
                     className="hidden h-12 transition delay-150 duration-300 ease-in-out md:block xl:h-14"
-
                     viewBox="0 0 56 56"
                     fill="none"
                   >
@@ -240,14 +228,11 @@ const Homepage = () => {
 
             <div class="flex flex-col items-center justify-center text-center">
               <div className="fixed bottom-12 mx-auto block md:hidden">
-
                 <button onClick={() => setIsListen((prevState) => !prevState)}>
                   {isListen ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-
                       className="h-20 w-20 scale-125 rounded-full transition delay-150 duration-300 ease-in-out"
-
                       viewBox="0 0 56 56"
                       fill="none"
                     >
@@ -266,9 +251,7 @@ const Homepage = () => {
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-
                       className="h-20 w-20 rounded-full transition delay-150 duration-300 ease-in-out"
-
                       viewBox="0 0 56 56"
                       fill="none"
                     >
@@ -297,8 +280,6 @@ const Homepage = () => {
               </div>
             </div>
             <DoctorsList doctors={doctors} />
-
-
           </div>
         </div>
         {/* */}

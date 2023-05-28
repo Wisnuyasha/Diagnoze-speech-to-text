@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import MedicineList from "../components/MedicineList";
-import MedicineListAlo from "../components/MedicineListAlo";
+import MedicineList from "../components/Medicine/MedicineList";
+import MedicineListAlo from "../components/Medicine/MedicineListAlo";
 
-import LandingPage from "../components/LandingPage";
+import LandingPage from "../components/Layouts/LandingPage";
 import axios from "axios";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Layouts/Navbar";
 import { TrashIcon } from "../assets/Diagnoze/TrashIcon";
 import SearchIcon from "../assets/Diagnoze/SearchIcon";
 import UnmuteIcon from "../assets/Diagnoze/UnmuteIcon";
@@ -48,8 +48,7 @@ const Homepage = () => {
   //     });
   // }
 
-  async function getMedicine(query) {
-
+  async function getMedicine(query, category) {
     await axios
       .get("http://localhost:5000/api/alo/medicine/search", {
         params: {
@@ -60,7 +59,6 @@ const Homepage = () => {
         console.log(response.data.result.data);
         const api = response.data.result.data;
         setMedicine(api);
-
 
         if (category === "price") {
           const priceSort = api.sort((a, b) => {
@@ -76,8 +74,8 @@ const Homepage = () => {
           const ratingSort = api.sort((a, b) => {
             const isAflot = parseFloat(a.rating);
             const isBflot = parseFloat(b.rating);
-            if (isNaN(isAflot)) return 1; 
-            if (isNaN(isBflot)) return -1; 
+            if (isNaN(isAflot)) return 1;
+            if (isNaN(isBflot)) return -1;
             return isBflot - isAflot;
           });
           console.log(ratingSort);
@@ -90,7 +88,6 @@ const Homepage = () => {
         console.error(error);
       });
   }
-
 
   useEffect(() => {
     handleListen();
@@ -133,9 +130,8 @@ const Homepage = () => {
   };
 
   const handleSaveDiagnoze = async () => {
-
     // await getData(diagnoze);
-    await getMedicine(diagnoze);
+    await getMedicine(diagnoze, category);
 
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
@@ -158,6 +154,11 @@ const Homepage = () => {
   } else if (category === "") {
     categoryRender = medicine ? <MedicineListAlo medicine={medicine} /> : null;
   }
+
+  const handleSortCategory = async (category) => {
+    setCategory(category);
+    await getMedicine(savedDiagnoze, category);
+  };
 
   return (
     <>
@@ -222,19 +223,13 @@ const Homepage = () => {
 
             <div className="mt-4 flex h-fit w-full justify-center gap-4 lg:pr-16">
               <button
-                onClick={async () => {
-                  setCategory("price");
-                  await getMedicine(savedDiagnoze);
-                }}
+                onClick={() => handleSortCategory("price")}
                 className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
               >
                 Price
               </button>
               <button
-                onClick={async () => {
-                  setCategory("rating");
-                  await getMedicine(savedDiagnoze);
-                }}
+                onClick={() => handleSortCategory("rating")}
                 className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
               >
                 Rating

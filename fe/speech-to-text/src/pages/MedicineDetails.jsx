@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Layouts/Navbar";
 import axios from "axios";
 
 export default function MedicineDetail() {
@@ -128,9 +128,9 @@ export default function MedicineDetail() {
           </div>
           <Link
             to={{
-              pathname: '/',
+              pathname: "/",
             }}
-            className="mx-auto mt-6 h-fit w-fit rounded-lg bg-dpurple px-12 py-1 font-nunito font-extrabold text-white lg:px-16 lg:py-2 hover:scale-110 transition duration-300 delay-150 hover:ease-in-out lg:text-lg xl:mt-10 xl:px-20 xl:py-3 xl:text-xl"
+            className="mx-auto mt-6 h-fit w-fit rounded-lg bg-dpurple px-12 py-1 font-nunito font-extrabold text-white transition delay-150 duration-300 hover:scale-110 hover:ease-in-out lg:px-16 lg:py-2 lg:text-lg xl:mt-10 xl:px-20 xl:py-3 xl:text-xl"
           >
             Kembali
           </Link>

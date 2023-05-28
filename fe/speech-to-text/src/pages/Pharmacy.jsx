@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import LandingPage from "../components/LandingPage";
-import Navbar from "../components/Navbar";
+import LandingPage from "../components/Layouts/LandingPage";
+import Navbar from "../components/Layouts/Navbar";
 import LocationIcon from "../assets/HospitalPharmacy/LocationIcon";
-import { PharmacyList } from "../components/PharmacyList";
+import { PharmacyList } from "../components/Pharmacy/PharmacyList";
 
 export default function Pharmacy() {
   const [currentCity, setCurrentCity] = useState("");

@@ -3,6 +3,7 @@ import MedicineDetails from "./pages/MedicineDetails";
 import Hospitals from "./pages/Hospitals";
 import Pharmacy from "./pages/Pharmacy";
 import Doctors from "./pages/Doctors";
+import Bookmarks from "./pages/Bookmarks";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
             <Route path={"/hospitals"} element={<Hospitals />} />
             <Route path={"/pharmacy"} element={<Pharmacy />} />
             <Route path={"/doctors"} element={<Doctors />} />
+            <Route path={"/bookmarks"} element={<Bookmarks />} />
             <Route exact path="/details/:id" element={<MedicineDetails />} />
           </Routes>
         </Router>

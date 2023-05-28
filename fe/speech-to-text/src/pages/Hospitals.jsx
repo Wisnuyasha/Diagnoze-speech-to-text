@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import HospitalList from "../components/HospitalList";
-import LandingPage from "../components/LandingPage";
-import Navbar from "../components/Navbar";
+import HospitalList from "../components/Hospitals/HospitalList";
+import LandingPage from "../components/Layouts/LandingPage";
+import Navbar from "../components/Layouts/Navbar";
 import LocationIcon from "../assets/HospitalPharmacy/LocationIcon";
 
 const Hospitals = () => {

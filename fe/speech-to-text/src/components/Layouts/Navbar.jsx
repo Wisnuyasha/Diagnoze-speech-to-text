@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DiagnozeIcon from "../assets/Navbar/DiagnozeIcon";
-import HospitalIcon from "../assets/Navbar/HospitalIcon";
-import PharmacyIcon from "../assets/Navbar/PharmacyIcon";
-import DoctorsIcon from "../assets/Navbar/DoctorsIcon";
+import DiagnozeIcon from "../../assets/Navbar/DiagnozeIcon";
+import HospitalIcon from "../../assets/Navbar/HospitalIcon";
+import PharmacyIcon from "../../assets/Navbar/PharmacyIcon";
+import DoctorsIcon from "../../assets/Navbar/DoctorsIcon";
 
 export default function Navbar() {
   return (
@@ -92,6 +92,19 @@ export default function Navbar() {
                   <DoctorsIcon />
                   <span className="ml-3 font-nunito text-xl font-bold xl:text-2xl">
                     Doctors
+                  </span>
+                </Link>
+              </li>
+              <li className="flex items-center rounded-full px-4 hover:bg-dpurple">
+                <Link
+                  to={{
+                    pathname: `/bookmarks`,
+                  }}
+                  className="mx-auto flex items-center justify-center  rounded-lg p-4 text-center text-dpurple hover:text-white "
+                >
+                  <DoctorsIcon />
+                  <span className="ml-3 font-nunito text-xl font-bold xl:text-2xl">
+                    Bookmarks
                   </span>
                 </Link>
               </li>
