@@ -8,23 +8,27 @@ export default function MedicineList({ medicine }) {
         ? medicine.map((med) => (
             <div
               className=" flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-lg sm:p-5 md:p-6 "
-              key={med.external_id}
+              key={med.id}
             >
-
-
               <img
-                src={med.image_url}
-
+                src={med.image_300}
                 alt={med.name}
                 className="mx-auto w-40"
               />
-              <span className="mx-auto font-nunito text-lg font-black text-dblack">
+              <span className="mx-auto text-center font-nunito text-lg font-black text-dblack">
                 {med.name}
               </span>
               <p className="mx-auto font-inter text-base font-semibold text-dblack">
-
-                IDR {med.min_price} - {med.base_price}
+                IDR {med.price.display_amount}
               </p>
+              <div className="flex w-full justify-between">
+                <span className="mx-auto font-inter text-base font-semibold text-dblack">
+                  Rating: {med.rating}
+                </span>
+                <span className="mx-auto font-inter text-base font-semibold text-dblack">
+                  Stock: {med.stock}
+                </span>
+              </div>
 
               <Link
                 to={{

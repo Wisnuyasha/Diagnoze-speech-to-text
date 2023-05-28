@@ -11,7 +11,7 @@ app.get("/api/buy-medicine/products/search", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `https://www.alodokter.com/api/aloshop/products?term=${query}`
+      `https://magneto.api.halodoc.com/api/v1/buy-medicine/products/search/${query}`
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(response.data);
@@ -28,6 +28,21 @@ app.get("/api/buy-medicine/products/details", async (req, res) => {
     console.log(query);
     const response = await axios.get(
       `https://magneto.api.halodoc.com/api/v1/buy-medicine/products/detail/${query}`
+    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+app.get("/api/alo/medicine/search", async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const response = await axios.get(
+      `https://www.alodokter.com/api/aloshop/products?term=${query}`
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(response.data);
