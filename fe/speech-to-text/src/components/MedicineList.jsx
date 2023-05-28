@@ -8,12 +8,12 @@ export default function MedicineList({ medicine }) {
         ? medicine.map((med) => (
             <div
               className=" flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-lg sm:p-5 md:p-6 "
-              key={med.external_id}
+              key={med.id}
             >
 
 
               <img
-                src={med.image_url}
+                src={med.image_300}
 
                 alt={med.name}
                 className="mx-auto w-40"

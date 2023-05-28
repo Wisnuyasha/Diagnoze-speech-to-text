@@ -25,6 +25,7 @@ const Homepage = () => {
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
   const [medicine, setMedicine] = useState([]);
+
   const [medicinePrice, setMedicinePrice] = useState([]);
   const [medicineRating, setMedicineRating] = useState([]);
   // const [med, setMed] = useState([]);
@@ -48,6 +49,7 @@ const Homepage = () => {
   // }
 
   async function getMedicine(query) {
+
     await axios
       .get("http://localhost:5000/api/alo/medicine/search", {
         params: {
@@ -58,6 +60,7 @@ const Homepage = () => {
         console.log(response.data.result.data);
         const api = response.data.result.data;
         setMedicine(api);
+
 
         if (category === "price") {
           const priceSort = api.sort((a, b) => {
@@ -87,6 +90,7 @@ const Homepage = () => {
         console.error(error);
       });
   }
+
 
   useEffect(() => {
     handleListen();
@@ -129,8 +133,10 @@ const Homepage = () => {
   };
 
   const handleSaveDiagnoze = async () => {
+
     // await getData(diagnoze);
     await getMedicine(diagnoze);
+
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
   };
