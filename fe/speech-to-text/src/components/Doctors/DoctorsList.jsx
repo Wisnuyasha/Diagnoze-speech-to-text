@@ -15,16 +15,17 @@ export default function DoctorsList({ doctors }) {
               <img
                 src={doc.image_url}
 
-                alt={doc.headline}
+                alt={doc.first_name}
                 className="mx-auto w-40"
               />
               <span className="mx-auto font-nunito text-lg font-black text-dblack">
-                {/* {doc.alias_name} */}
+                {doc.first_name}
+                {doc.last_name}
               </span>
               <p className="mx-auto font-inter text-base font-semibold text-dblack">
-                {/* Rating: {doc.rating_percentage}
-                Spesialis: {doc.speciality_name}
-                Pasien: {doc.booking_count} */}
+                Rating: {doc.rating}
+                Harga: Rp. {doc.best_doctor_package.price}
+                Status: {doc.status}
               </p>
 
               <Link

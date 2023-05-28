@@ -73,12 +73,12 @@ app.put("/hospital/location", async (req, res) => {
   }
 });
 
-app.get("/api/alo/medicine/search", async (req, res) => {
+app.get("/api/doctors/search", async (req, res) => {
   const { query } = req.query;
 
   try {
     const response = await axios.get(
-      `https://www.alodokter.com/api/aloshop/products?term=${query}`
+      `https://magneto.api.halodoc.com/api/v1/tanya-dokter/doctors/search?per_page=20&page_no=1&search_text=${query}`
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(response.data);

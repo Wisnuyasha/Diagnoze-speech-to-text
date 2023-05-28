@@ -27,8 +27,7 @@ const Homepage = () => {
         },
       })
       .then((response) => {
-        console.log(response.data.result.data);
-        // const doctors = response.data.result.data; = buat alodokter
+        console.log(response.data.result);
         const doctors = response.data.result;
         console.log(doctors);
         setDoctors(doctors);
