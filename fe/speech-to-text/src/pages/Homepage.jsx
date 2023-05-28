@@ -25,25 +25,27 @@ const Homepage = () => {
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
   const [medicine, setMedicine] = useState([]);
-  const [med, setMed] = useState([]);
+  const [medicinePrice, setMedicinePrice] = useState([]);
+  const [medicineRating, setMedicineRating] = useState([]);
+  // const [med, setMed] = useState([]);
   const [category, setCategory] = useState("");
 
-  async function getData(query) {
-    await axios
-      .get("http://localhost:5000/api/buy-medicine/products/search", {
-        params: {
-          query: query,
-        },
-      })
-      .then((response) => {
-        const api = response.data.result;
-        console.log(api);
-        setMed(api);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  // async function getData(query) {
+  //   await axios
+  //     .get("http://localhost:5000/api/buy-medicine/products/search", {
+  //       params: {
+  //         query: query,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const api = response.data.result;
+  //       console.log(api);
+  //       setMed(api);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
 
   async function getMedicine(query) {
     await axios
@@ -56,6 +58,30 @@ const Homepage = () => {
         console.log(response.data.result.data);
         const api = response.data.result.data;
         setMedicine(api);
+
+        if (category === "price") {
+          const priceSort = api.sort((a, b) => {
+            return b.price.amount - a.price.amount;
+          });
+          console.log(priceSort);
+          setMedicinePrice(priceSort);
+        } else {
+          setMedicinePrice(api);
+        }
+
+        if (category === "rating") {
+          const ratingSort = api.sort((a, b) => {
+            const isAflot = parseFloat(a.rating);
+            const isBflot = parseFloat(b.rating);
+            if (isNaN(isAflot)) return 1; 
+            if (isNaN(isBflot)) return -1; 
+            return isBflot - isAflot;
+          });
+          console.log(ratingSort);
+          setMedicineRating(ratingSort);
+        } else {
+          setMedicineRating(api);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -68,7 +94,9 @@ const Homepage = () => {
 
   useEffect(() => {
     console.log("useEffect", medicine);
-  }, [medicine]);
+    console.log("sort", medicinePrice);
+    console.log(category);
+  }, [medicine, category]);
 
   const handleListen = () => {
     if (isListen) {
@@ -101,7 +129,7 @@ const Homepage = () => {
   };
 
   const handleSaveDiagnoze = async () => {
-    await getData(diagnoze);
+    // await getData(diagnoze);
     await getMedicine(diagnoze);
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
@@ -113,19 +141,16 @@ const Homepage = () => {
 
   let categoryRender;
 
-  const priceMed = medicine.sort((a, b) => {
-    return a.price.amount - b.price.amount;
-  });
-  const ratingMed = medicine.sort((a, b) => {
-    return a.price.amount - b.price.amount;
-  });
-
   if (category === "price") {
-    categoryRender = med ? <MedicineListAlo medicine={priceMed} /> : null;
+    categoryRender = medicinePrice ? (
+      <MedicineListAlo medicine={medicinePrice} />
+    ) : null;
   } else if (category === "rating") {
-    categoryRender = med ? <MedicineListAlo medicine={ratingMed} /> : null;
+    categoryRender = medicineRating ? (
+      <MedicineListAlo medicine={medicineRating} />
+    ) : null;
   } else if (category === "") {
-    categoryRender = med ? <MedicineListAlo medicine={medicine} /> : null;
+    categoryRender = medicine ? <MedicineListAlo medicine={medicine} /> : null;
   }
 
   return (
@@ -191,13 +216,19 @@ const Homepage = () => {
 
             <div className="mt-4 flex h-fit w-full justify-center gap-4 lg:pr-16">
               <button
-                onClick={() => setCategory("price")}
+                onClick={async () => {
+                  setCategory("price");
+                  await getMedicine(savedDiagnoze);
+                }}
                 className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
               >
                 Price
               </button>
               <button
-                onClick={() => setCategory("rating")}
+                onClick={async () => {
+                  setCategory("rating");
+                  await getMedicine(savedDiagnoze);
+                }}
                 className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
               >
                 Rating
