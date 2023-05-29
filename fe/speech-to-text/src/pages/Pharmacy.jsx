@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import LandingPage from "../components/LandingPage";
-import Navbar from "../components/Navbar";
-import { PharmacyList } from "../components/PharmacyList";
+import LandingPage from "../components/Layouts/LandingPage";
+import Navbar from "../components/Layouts/Navbar";
+import LocationIcon from "../assets/HospitalPharmacy/LocationIcon";
+import { PharmacyList } from "../components/Pharmacy/PharmacyList";
 
 export default function Pharmacy() {
   const [currentCity, setCurrentCity] = useState("");
@@ -50,7 +51,7 @@ export default function Pharmacy() {
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${long}&format=jsonv2`
       )
       .then((response) => {
-        const city = response.data.display_name;
+        const city = response.data.address.city;
 
         searchNearestPharmacy(lat, long);
         setCurrentCity(city);
@@ -79,12 +80,40 @@ export default function Pharmacy() {
   return (
     <div className="flex max-h-full min-h-screen w-full bg-dbg">
       <Navbar />
-      <div className="flex h-full w-full flex-col pt-5 md:pt-7">
+      <div className="flex h-full w-full flex-col">
         <LandingPage />
-        <p className="mb-2 mt-5 font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
-          You are in <span className="text-2xl sm:text-3xl">{currentCity}</span>
-        </p>
-        <PharmacyList pharmacy={pharmacy} />
+        <div className="mx-6 mt-3 flex flex-col sm:mt-4 md:mt-5 lg:mx-10 lg:mt-6 xl:mt-7">
+          <span className="mb-2 font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
+            Nearby Pharmacy
+          </span>
+          <div className="flex items-center md:gap-6">
+            <div className="flex h-10 w-full items-center rounded-lg bg-white px-3 pl-4 md:h-12 xl:h-14 xl:px-5">
+              <div className="flex w-full items-center justify-between">
+                {currentCity ? (
+                  <>
+                    <span className="block font-nunito text-base font-bold text-dblack md:hidden lg:text-lg">
+                      Kamu sedang di{" "}
+                      <span className="font-black">Kota {currentCity}</span>
+                    </span>
+                    <span className="hidden font-nunito text-base font-bold text-dblack md:block lg:text-lg">
+                      Kamu saat ini sedang berada di{" "}
+                      <span className="font-black">Kota {currentCity}</span>
+                    </span>
+                    <LocationIcon />
+                  </>
+                ) : (
+                  <>
+                    <span className="block font-nunito text-base font-bold text-dblack lg:text-lg">
+                      Sedang Mencari Lokasimu..
+                    </span>
+                    <LocationIcon />
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          <PharmacyList pharmacy={pharmacy} />
+        </div>
       </div>
     </div>
   );

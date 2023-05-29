@@ -13,7 +13,8 @@ module.exports = {
         dboxdet: '#F5F5F5', //buat kotak di item details
         dred: '#BD2B23',
         dblue: '#2733C7',
-        dgreen: '#198961'
+        dgreen: '#198961',
+        dline: '#D1D1D1'
       },
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],

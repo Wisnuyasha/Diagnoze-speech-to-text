@@ -37,6 +37,21 @@ app.get("/api/buy-medicine/products/details", async (req, res) => {
   }
 });
 
+app.get("/api/alo/medicine/search", async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const response = await axios.get(
+      `https://www.alodokter.com/api/aloshop/products?term=${query}`
+    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 app.put("/hospital/location", async (req, res) => {
   try {
     const response = await axios.put(
@@ -52,6 +67,21 @@ app.put("/hospital/location", async (req, res) => {
     );
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(response.data.provider_locations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+app.get("/api/doctors/search", async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const response = await axios.get(
+      `https://magneto.api.halodoc.com/api/v1/tanya-dokter/doctors/search?per_page=20&page_no=1&search_text=${query}`
+    );
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.json(response.data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
