@@ -20,7 +20,12 @@ export default function Bookmarks() {
       <Navbar />
       <div className="flex h-full w-full flex-col">
         <LandingPage />
-        <MedicineListAlo medicine={bookmarkedMedicines} />
+        <div className="flex h-fit w-full flex-col border-black p-6 sm:px-9 md:px-11 md:pt-8">
+            <span className="mb-2 font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
+              Bookmarked Medicine
+            </span>
+            <MedicineListAlo medicine={bookmarkedMedicines} />
+        </div>
       </div>
     </div>
   );

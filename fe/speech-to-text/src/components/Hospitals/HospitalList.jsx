@@ -1,4 +1,6 @@
 import React from "react";
+import HouseIcon from "../../assets/HospitalPharmacy/HouseIcon";
+import CompassIcon from "../../assets/HospitalPharmacy/CompassIcon";
 
 export default function HospitalList({ hospitals }) {
   return (
@@ -11,11 +13,12 @@ export default function HospitalList({ hospitals }) {
                 className=" flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-lg sm:p-5 md:p-6 "
                 key={h}
               >
-                <span className="mx-auto font-nunito text-lg font-black text-dblack">
+                <HouseIcon />
+                <span className="font-nunito text-lg font-black text-dblack">
                   {h.display_name}
                 </span>
-                <p className="mx-auto font-inter text-base font-semibold text-dblack">
-                  Jarak : {h.distance.toFixed(2)} km
+                <p className="flex items-center gap-x-2 font-inter text-base font-semibold text-dblack">
+                  <CompassIcon /> {h.distance.toFixed(2)} km
                 </p>
               </div>
             ))

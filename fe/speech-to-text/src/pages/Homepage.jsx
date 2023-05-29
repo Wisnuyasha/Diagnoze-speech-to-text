@@ -313,7 +313,7 @@ const Homepage = () => {
                           <div
                             onClick={() =>
                               handleSortCategory(
-                                "ratingAsc",
+                                "ratingDesc",
                                 "Rating Tertinggi"
                               )
                             }
@@ -327,7 +327,7 @@ const Homepage = () => {
                           <div
                             onClick={() =>
                               handleSortCategory(
-                                "ratingDesc",
+                                "ratingAsc",
                                 "Rating Terendah"
                               )
                             }
