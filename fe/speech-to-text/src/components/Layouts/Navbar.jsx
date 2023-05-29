@@ -4,6 +4,7 @@ import DiagnozeIcon from "../../assets/Navbar/DiagnozeIcon";
 import HospitalIcon from "../../assets/Navbar/HospitalIcon";
 import PharmacyIcon from "../../assets/Navbar/PharmacyIcon";
 import DoctorsIcon from "../../assets/Navbar/DoctorsIcon";
+import BookmarksIcon from "../../assets/Navbar/BookmarksIcon";
 
 export default function Navbar() {
   return (
@@ -102,7 +103,7 @@ export default function Navbar() {
                   }}
                   className="mx-auto flex items-center justify-center  rounded-lg p-4 text-center text-dpurple hover:text-white "
                 >
-                  <DoctorsIcon />
+                  <BookmarksIcon />
                   <span className="ml-3 font-nunito text-xl font-bold xl:text-2xl">
                     Bookmarks
                   </span>
