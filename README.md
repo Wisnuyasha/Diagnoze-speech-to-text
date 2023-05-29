@@ -2,14 +2,14 @@
 
 ## Description
 
-Project Speech-to-Text matakuliah **Teknologi Multimedia Kelompok X**
+Project Speech-to-Text matakuliah **Teknologi Multimedia Kelompok 3**
 
 
 ## Tech Stack
 
 **Client:** React, TailwindCSS
 
-**Server:** 
+**Backend:** Express, Axios
 
 ## Documentation
 
