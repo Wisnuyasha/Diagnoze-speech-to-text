@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/Layouts/Navbar";
 import LandingPage from "../components/Layouts/LandingPage";
-import MedicineListAlo from "../components/Medicine/MedicineListAlo";
+import MedicineList from "../components/Medicine/MedicineList";
 
 export default function Bookmarks() {
   const [bookmarkedMedicines, setBookmarkedMedicines] = useState([]);
@@ -24,7 +24,7 @@ export default function Bookmarks() {
             <span className="mb-2 font-nunito text-2xl font-black text-dblack sm:mb-3 sm:text-3xl md:text-4xl">
               Bookmarked Medicine
             </span>
-            <MedicineListAlo medicine={bookmarkedMedicines} />
+            <MedicineList medicine={bookmarkedMedicines} />
         </div>
       </div>
     </div>

@@ -24,8 +24,8 @@ export default function Pharmacy() {
   }, [currentCity]);
 
   const getDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Radius of the earth in km
-    const dLat = deg2rad(lat2 - lat1); // deg2rad below
+    const R = 6371;
+    const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lon2 - lon1);
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -34,7 +34,7 @@ export default function Pharmacy() {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c; // Distance in km
+    const d = R * c;
     return d;
   };
 
@@ -62,7 +62,6 @@ export default function Pharmacy() {
 
   const searchNearestPharmacy = (lat, long) => {
     getCurrentCity();
-
     axios
       .get(
         `https://nominatim.openstreetmap.org/search.php?q=pharmacy+in+${currentCity}&format=json&bounded=1&viewbox=${
@@ -77,6 +76,7 @@ export default function Pharmacy() {
         setPharmacy(pharms);
       });
   };
+
   return (
     <div className="flex max-h-full min-h-screen w-full bg-dbg">
       <Navbar />

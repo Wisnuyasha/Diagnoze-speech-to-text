@@ -9,27 +9,6 @@ import BookmarksIcon from "../../assets/Navbar/BookmarksIcon";
 export default function Navbar() {
   return (
     <div className="hidden w-1/3 rounded-xl lg:block">
-      {/* <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
-        type="button"
-        className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-800 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-      >
-        <span className="sr-only">Open sidebar</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-8 h-8"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </button> */}
       <aside
         id="default-sidebar"
         className="fixed h-full w-1/4 -translate-x-full rounded-xl transition-transform sm:translate-x-0"
@@ -80,19 +59,6 @@ export default function Navbar() {
                   <PharmacyIcon />
                   <span className="ml-3 font-nunito text-xl font-bold xl:text-2xl">
                     Pharmacy
-                  </span>
-                </Link>
-              </li>
-              <li className="flex items-center rounded-full px-4 hover:bg-dpurple">
-                <Link
-                  to={{
-                    pathname: `/doctors`,
-                  }}
-                  className="mx-auto flex items-center justify-center  rounded-lg p-4 text-center text-dpurple hover:text-white "
-                >
-                  <DoctorsIcon />
-                  <span className="ml-3 font-nunito text-xl font-bold xl:text-2xl">
-                    Doctors
                   </span>
                 </Link>
               </li>

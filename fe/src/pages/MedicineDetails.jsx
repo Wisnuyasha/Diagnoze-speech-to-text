@@ -79,8 +79,6 @@ export default function MedicineDetail() {
     getMedicineDetail();
   }, [id]);
 
-  // const api = if()
-
   return (
     <div className="flex max-h-full min-h-screen w-full bg-dbg">
       <Navbar />

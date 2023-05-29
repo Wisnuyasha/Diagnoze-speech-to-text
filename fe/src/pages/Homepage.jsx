@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import MedicineList from "../components/Medicine/MedicineList";
-import MedicineListAlo from "../components/Medicine/MedicineListAlo";
-
-import LandingPage from "../components/Layouts/LandingPage";
 import axios from "axios";
+
+import MedicineList from "../components/Medicine/MedicineList";
+import LandingPage from "../components/Layouts/LandingPage";
 import Navbar from "../components/Layouts/Navbar";
-import { TrashIcon } from "../assets/Diagnoze/TrashIcon";
+
+import TrashIcon from "../assets/Diagnoze/TrashIcon";
 import SearchIcon from "../assets/Diagnoze/SearchIcon";
 import UnmuteIcon from "../assets/Diagnoze/UnmuteIcon";
 import MuteIcon from "../assets/Diagnoze/MuteIcon";
@@ -25,51 +25,32 @@ const Homepage = () => {
   const [isListen, setIsListen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
 
-  // const [med, setMed] = useState([]);
-  const [medicine, setMedicine] = useState([]);
+  const [med, setMed] = useState([]);
   const [medicinePriceAsc, setMedicinePriceAsc] = useState([]);
   const [medicinePriceDesc, setMedicinePriceDesc] = useState([]);
-  const [medicineRatingAsc, setMedicineRatingAsc] = useState([]);
-  const [medicineRatingDesc, setMedicineRatingDesc] = useState([]);
 
   const [category, setCategory] = useState("");
   const [sorting, setSorting] = useState("Harga Termurah");
 
-  // async function getData(query) {
-  //   await axios
-  //     .get("http://localhost:5000/api/buy-medicine/products/search", {
-  //       params: {
-  //         query: query,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       const api = response.data.result;
-  //       console.log(api);
-  //       setMed(api);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
-
-  async function getMedicine(query, category) {
+  async function getData(query, category) {
     await axios
-      .get("http://localhost:5000/api/alo/medicine/search", {
+      .get("http://localhost:5000/api/buy-medicine/products/search", {
         params: {
           query: query,
         },
       })
       .then((response) => {
-        console.log(response.data.result.data);
-        const api = response.data.result.data;
-        setMedicine(api);
+        const api = response.data.result;
+        console.log(api);
+        setMed(api);
 
         if (category === "priceAsc") {
           const priceSort = api.sort((a, b) => {
-            return a.price.amount - b.price.amount;
+            return a.base_price - b.base_price;
           });
           console.log(priceSort);
           setMedicinePriceAsc(priceSort);
@@ -79,40 +60,12 @@ const Homepage = () => {
 
         if (category === "priceDesc") {
           const priceSort = api.sort((a, b) => {
-            return b.price.amount - a.price.amount;
+            return b.base_price - a.base_price;
           });
           console.log(priceSort);
           setMedicinePriceDesc(priceSort);
         } else {
           setMedicinePriceDesc(api);
-        }
-
-        if (category === "ratingAsc") {
-          const ratingSort = api.sort((a, b) => {
-            const isAflot = parseFloat(a.rating);
-            const isBflot = parseFloat(b.rating);
-            if (isNaN(isAflot)) return 1;
-            if (isNaN(isBflot)) return -1;
-            return isAflot - isBflot;
-          });
-          console.log(ratingSort);
-          setMedicineRatingAsc(ratingSort);
-        } else {
-          setMedicineRatingAsc(api);
-        }
-
-        if (category === "ratingDesc") {
-          const ratingSort = api.sort((a, b) => {
-            const isAflot = parseFloat(a.rating);
-            const isBflot = parseFloat(b.rating);
-            if (isNaN(isAflot)) return 1;
-            if (isNaN(isBflot)) return -1;
-            return isBflot - isAflot;
-          });
-          console.log(ratingSort);
-          setMedicineRatingDesc(ratingSort);
-        } else {
-          setMedicineRatingDesc(api);
         }
       })
       .catch((error) => {
@@ -125,10 +78,9 @@ const Homepage = () => {
   }, [isListen]);
 
   useEffect(() => {
-    console.log("useEffect", medicine);
-    // console.log("sort", medicinePrice);
+    console.log("useEffect", med);
     console.log(category);
-  }, [medicine, category]);
+  }, [med, category]);
 
   const handleListen = () => {
     if (isListen) {
@@ -161,8 +113,7 @@ const Homepage = () => {
   };
 
   const handleSaveDiagnoze = async () => {
-    // await getData(diagnoze);
-    await getMedicine(diagnoze, category);
+    await getData(diagnoze, category);
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
   };
@@ -172,33 +123,25 @@ const Homepage = () => {
     setDiagnoze([]);
   };
 
-  let categoryRender;
-
-  if (category === "priceAsc") {
-    categoryRender = medicinePriceAsc ? (
-      <MedicineListAlo medicine={medicinePriceAsc} />
-    ) : null;
-  } else if (category === "priceDesc") {
-    categoryRender = medicineRatingDesc ? (
-      <MedicineListAlo medicine={medicineRatingDesc} />
-    ) : null;
-  } else if (category === "ratingAsc") {
-    categoryRender = medicineRatingAsc ? (
-      <MedicineListAlo medicine={medicineRatingAsc} />
-    ) : null;
-  } else if (category === "ratingDesc") {
-    categoryRender = medicineRatingAsc ? (
-      <MedicineListAlo medicine={medicineRatingDesc} />
-    ) : null;
-  } else if (category === "") {
-    categoryRender = medicine ? <MedicineListAlo medicine={medicine} /> : null;
-  }
-
   const handleSortCategory = async (category, sorting) => {
     setCategory(category);
     setSorting(sorting);
-    await getMedicine(savedDiagnoze, category);
+    await getData(savedDiagnoze, category);
   };
+
+  let listRender;
+
+  if (category === "priceAsc") {
+    listRender = medicinePriceAsc ? (
+      <MedicineList medicine={medicinePriceAsc} />
+    ) : null;
+  } else if (category === "priceDesc") {
+    listRender = medicinePriceDesc ? (
+      <MedicineList medicine={medicinePriceDesc} />
+    ) : null;
+  } else if (category === "") {
+    listRender = med ? <MedicineList medicine={med} /> : null;
+  }
 
   return (
     <>
@@ -288,7 +231,7 @@ const Homepage = () => {
                       </p>
                       <DropDownIcon />
                       {isOpen ? (
-                        <div className="absolute inset-x-0 -bottom-44 z-50 h-fit w-full overflow-hidden rounded-lg border-2 border-dpurple bg-white/80 backdrop-blur-sm transition-all ">
+                        <div className="absolute inset-x-0 -bottom-24 z-50 h-fit w-full overflow-hidden rounded-lg border-2 border-dpurple bg-white/80 backdrop-blur-sm">
                           <div
                             onClick={() =>
                               handleSortCategory("priceAsc", "Harga Termurah")
@@ -310,34 +253,6 @@ const Homepage = () => {
                               Harga Termahal
                             </p>
                           </div>
-                          <div
-                            onClick={() =>
-                              handleSortCategory(
-                                "ratingDesc",
-                                "Rating Tertinggi"
-                              )
-                            }
-                            className="flex px-4 py-2 text-dblack hover:bg-dpurple hover:text-white"
-                          >
-                            {" "}
-                            <p className="font-inter font-bold ">
-                              Rating Tertinggi
-                            </p>
-                          </div>
-                          <div
-                            onClick={() =>
-                              handleSortCategory(
-                                "ratingAsc",
-                                "Rating Terendah"
-                              )
-                            }
-                            className="flex px-4 py-2 text-dblack hover:bg-dpurple hover:text-white"
-                          >
-                            {" "}
-                            <p className="font-inter font-bold ">
-                              Rating Terendah
-                            </p>
-                          </div>
                         </div>
                       ) : (
                         ""
@@ -351,11 +266,9 @@ const Homepage = () => {
             )}
 
             {/* Medicine List */}
-            {categoryRender}
-            {/* <MedicineList medicine={med} /> */}
+            {listRender}
           </div>
         </div>
-        {/* */}
       </div>
     </>
   );
