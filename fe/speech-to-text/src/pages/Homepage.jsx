@@ -65,7 +65,9 @@ const Homepage = () => {
         if (category === "price") {
           const priceSort = api.sort((a, b) => {
             // Mengubah cara pengurutan berdasarkan nilai sortPriceAsc
-            return sortPriceAsc ? a.price.amount - b.price.amount : b.price.amount - a.price.amount;
+            return sortPriceAsc
+              ? a.price.amount - b.price.amount
+              : b.price.amount - a.price.amount;
           });
           console.log(priceSort);
           setMedicinePrice(priceSort);
@@ -237,21 +239,20 @@ const Homepage = () => {
 
             <div className="mt-4 flex h-fit w-full justify-center gap-4 lg:pr-16">
               <button
-          onClick={() => handleSortCategory("price")}
-          className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
-        >
-          Price {sortPriceAsc ? 'Ascending' : 'Descending'}
-        </button>
-        <button
-          onClick={() => handleSortCategory("rating")}
-          className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
-        >
-          Rating {sortRatingAsc ? 'Ascending' : 'Descending'}
-        </button>
+                onClick={() => handleSortCategory("price")}
+                className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
+              >
+                Price {sortPriceAsc ? "Ascending" : "Descending"}
+              </button>
+              <button
+                onClick={() => handleSortCategory("rating")}
+                className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
+              >
+                Rating {sortRatingAsc ? "Ascending" : "Descending"}
+              </button>
             </div>
             {categoryRender}
-            {/* <MedicineListAlo medicine={medicine} />
-            <MedicineList medicine={med} /> */}
+            {/* <MedicineList medicine={med} /> */}
           </div>
         </div>
         {/* */}

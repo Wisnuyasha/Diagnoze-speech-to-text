@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 export default function MedicineListAlo({ medicine }) {
-  const [bookmarkedMedicines, setBookmarkedMedicines] = useState(JSON.parse(localStorage.getItem("bookmarkedMedicines") || "[]"));
+  const [bookmarkedMedicines, setBookmarkedMedicines] = useState(
+    JSON.parse(localStorage.getItem("bookmarkedMedicines") || "[]")
+  );
 
   useEffect(() => {
-    setBookmarkedMedicines(JSON.parse(localStorage.getItem("bookmarkedMedicines") || "[]"));
+    setBookmarkedMedicines(
+      JSON.parse(localStorage.getItem("bookmarkedMedicines") || "[]")
+    );
   }, []);
 
   const isBookmarked = (med) => {
@@ -16,20 +19,39 @@ export default function MedicineListAlo({ medicine }) {
     if (!isBookmarked(med)) {
       const newBookmarkedMedicines = [...bookmarkedMedicines, med];
       setBookmarkedMedicines(newBookmarkedMedicines);
-      localStorage.setItem("bookmarkedMedicines", JSON.stringify(newBookmarkedMedicines));
+      localStorage.setItem(
+        "bookmarkedMedicines",
+        JSON.stringify(newBookmarkedMedicines)
+      );
     }
   };
 
   const unbookmarkMedicine = (med) => {
-    const newBookmarkedMedicines = bookmarkedMedicines.filter((medicine) => medicine.id !== med.id);
+    const newBookmarkedMedicines = bookmarkedMedicines.filter(
+      (medicine) => medicine.id !== med.id
+    );
     setBookmarkedMedicines(newBookmarkedMedicines);
-    localStorage.setItem("bookmarkedMedicines", JSON.stringify(newBookmarkedMedicines));
+    localStorage.setItem(
+      "bookmarkedMedicines",
+      JSON.stringify(newBookmarkedMedicines)
+    );
   };
+
+  const newMedicine = medicine.map((med) => {
+    const newItem = { ...med };
+    const newStr = med.name.replace(/\s+/g, "-");
+    newItem.slug = newStr;
+    return newItem;
+  });
+
+  function handleRedirectClick({ slug, id }) {
+    window.location.href = `https://www.alodokter.com/aloshop/products/${slug}/${id}`;
+  }
 
   return (
     <div className="mt-3 grid h-full w-full grid-cols-1 gap-7 p-2 px-8 sm:mt-5 sm:grid-cols-2 sm:p-0 md:mt-5 md:gap-11 lg:grid-cols-3">
-      {medicine
-        ? medicine.map((med) => (
+      {newMedicine
+        ? newMedicine.map((med) => (
             <div
               className=" flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-lg sm:p-5 md:p-6 "
               key={med.id}
@@ -53,22 +75,28 @@ export default function MedicineListAlo({ medicine }) {
                   Stock: {med.stock}
                 </span>
               </div>
-
-              <Link
-                to={{
-                  pathname: `/details/${med.slug}`,
-                }}
-              >
-                <button className="w-full rounded-lg bg-dpurple py-2 font-nunito text-base font-extrabold text-white sm:text-lg">
-                  Lihat Detail
-                </button>
-              </Link>
               <button
-                  onClick={() => isBookmarked(med) ? unbookmarkMedicine(med) : bookmarkMedicine(med)}
-                  className={`w-full rounded-lg py-2 font-nunito text-base font-extrabold ${isBookmarked(med) ? "bg-red-500 text-white" : "bg-blue-500 text-white"} sm:text-lg`}
-                >
-                  {isBookmarked(med) ? "Bookmarked" : "Bookmark"}
-                </button>
+                onClick={() =>
+                  handleRedirectClick({ slug: med.slug, id: med.id })
+                }
+                className="w-full rounded-lg bg-dpurple py-2 font-nunito text-base font-extrabold text-white sm:text-lg"
+              >
+                Lihat Detail
+              </button>
+              <button
+                onClick={() =>
+                  isBookmarked(med)
+                    ? unbookmarkMedicine(med)
+                    : bookmarkMedicine(med)
+                }
+                className={`w-full rounded-lg py-2 font-nunito text-base font-extrabold ${
+                  isBookmarked(med)
+                    ? "bg-red-500 text-white"
+                    : "bg-blue-500 text-white"
+                } sm:text-lg`}
+              >
+                {isBookmarked(med) ? "Bookmarked" : "Bookmark"}
+              </button>
             </div>
           ))
         : ""}
