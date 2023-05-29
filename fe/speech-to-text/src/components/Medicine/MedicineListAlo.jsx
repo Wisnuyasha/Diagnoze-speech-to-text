@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from "react";
 import RatingStar from "../../assets/Medicine/RatingStar";
 import StockBox from "../../assets/Medicine/StockBox";
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    redheart: {
+      main: "#B22222",
+    },
+  },
+});
 
 export default function MedicineListAlo({ medicine }) {
   const [bookmarkedMedicines, setBookmarkedMedicines] = useState(
@@ -62,24 +74,26 @@ export default function MedicineListAlo({ medicine }) {
               key={med.id}
             >
               <div className="mb-0 flex w-full justify-end gap-0 pb-0">
-                {" "}
-                <button
-                  onClick={() =>
-                    isBookmarked(med)
-                      ? unbookmarkMedicine(med)
-                      : bookmarkMedicine(med)
-                  }
-                  className="w-fit"
-                >
-                  {isBookmarked(med) ? "Bd" : "B"}
-                </button>
+                <ThemeProvider theme={theme}>
+                  <Checkbox
+                    checked={isBookmarked(med)}
+                    onChange={() =>
+                      isBookmarked(med)
+                        ? unbookmarkMedicine(med)
+                        : bookmarkMedicine(med)
+                    }
+                    icon={<FavoriteBorder />}
+                    checkedIcon={<Favorite />}
+                    color="redheart"
+                  />
+                </ThemeProvider>
               </div>
               <img
                 src={med.image_300}
                 alt={med.name}
                 className="mx-auto w-40"
               />
-              <div className="w-full h-[0.15rem] bg-dline my-3"></div>
+              <div className="my-3 h-[0.15rem] w-full bg-dline"></div>
               <span className="mx-auto text-left font-nunito text-lg font-black text-dblack">
                 {med.name}
               </span>
@@ -87,10 +101,10 @@ export default function MedicineListAlo({ medicine }) {
                 IDR {med.price.amount}
               </p>
               <div className="flex w-full gap-2">
-                <span className="font-inter flex gap-1 items-center text-base font-semibold text-dblack">
+                <span className="flex items-center gap-1 font-inter text-base font-semibold text-dblack">
                   <RatingStar /> {med.rating}
                 </span>
-                <span className="font-inter flex gap-1 items-center text-base font-semibold text-dblack">
+                <span className="flex items-center gap-1 font-inter text-base font-semibold text-dblack">
                   <StockBox /> {med.stock}
                 </span>
               </div>
