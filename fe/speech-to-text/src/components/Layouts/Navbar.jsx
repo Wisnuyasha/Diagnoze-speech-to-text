@@ -35,8 +35,8 @@ export default function Navbar() {
         className="fixed h-full w-1/4 -translate-x-full rounded-xl transition-transform sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full overflow-y-auto rounded-xl bg-white px-3 py-4">
-          <div class="mt-16 flex flex-col items-center justify-center ">
+        <div className="h-full flex flex-col justify-center overflow-y-auto rounded-xl bg-white px-3 py-4">
+          <div class="flex flex-col items-center justify-center ">
             <div className="h-32 w-32 rounded-full bg-dpurple xl:h-40 xl:w-40"></div>
             <p class="mx-2 mt-2 text-3xl font-extrabold text-dpurple xl:text-4xl ">
               Diagno.ze

@@ -11,6 +11,7 @@ import UnmuteIcon from "../assets/Diagnoze/UnmuteIcon";
 import MuteIcon from "../assets/Diagnoze/MuteIcon";
 import MobileUnmuteIcon from "../assets/Diagnoze/MobileUnmuteIcon";
 import MobileMuteIcon from "../assets/Diagnoze/MobileMuteIcon";
+import DropDownIcon from "../assets/Diagnoze/DropDownIcon";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -22,16 +23,20 @@ mic.lang = ("en-US", "id-ID");
 
 const Homepage = () => {
   const [isListen, setIsListen] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [diagnoze, setDiagnoze] = useState(null);
   const [savedDiagnoze, setSavedDiagnoze] = useState([]);
-  const [medicine, setMedicine] = useState([]);
 
-  const [medicinePrice, setMedicinePrice] = useState([]);
-  const [medicineRating, setMedicineRating] = useState([]);
   // const [med, setMed] = useState([]);
+  const [medicine, setMedicine] = useState([]);
+  const [medicinePriceAsc, setMedicinePriceAsc] = useState([]);
+  const [medicinePriceDesc, setMedicinePriceDesc] = useState([]);
+  const [medicineRatingAsc, setMedicineRatingAsc] = useState([]);
+  const [medicineRatingDesc, setMedicineRatingDesc] = useState([]);
+
   const [category, setCategory] = useState("");
-  const [sortPriceAsc, setSortPriceAsc] = useState(true);
-  const [sortRatingAsc, setSortRatingAsc] = useState(true);
+  const [sorting, setSorting] = useState("Harga Termurah");
 
   // async function getData(query) {
   //   await axios
@@ -62,32 +67,52 @@ const Homepage = () => {
         const api = response.data.result.data;
         setMedicine(api);
 
-        if (category === "price") {
+        if (category === "priceAsc") {
           const priceSort = api.sort((a, b) => {
-            // Mengubah cara pengurutan berdasarkan nilai sortPriceAsc
-            return sortPriceAsc
-              ? a.price.amount - b.price.amount
-              : b.price.amount - a.price.amount;
+            return a.price.amount - b.price.amount;
           });
           console.log(priceSort);
-          setMedicinePrice(priceSort);
+          setMedicinePriceAsc(priceSort);
         } else {
-          setMedicinePrice(api);
+          setMedicinePriceAsc(api);
         }
 
-        if (category === "rating") {
+        if (category === "priceDesc") {
+          const priceSort = api.sort((a, b) => {
+            return b.price.amount - a.price.amount;
+          });
+          console.log(priceSort);
+          setMedicinePriceDesc(priceSort);
+        } else {
+          setMedicinePriceDesc(api);
+        }
+
+        if (category === "ratingAsc") {
           const ratingSort = api.sort((a, b) => {
             const isAflot = parseFloat(a.rating);
             const isBflot = parseFloat(b.rating);
             if (isNaN(isAflot)) return 1;
             if (isNaN(isBflot)) return -1;
-            // Mengubah cara pengurutan berdasarkan nilai sortRatingAsc
-            return sortRatingAsc ? isAflot - isBflot : isBflot - isAflot;
+            return isAflot - isBflot;
           });
           console.log(ratingSort);
-          setMedicineRating(ratingSort);
+          setMedicineRatingAsc(ratingSort);
         } else {
-          setMedicineRating(api);
+          setMedicineRatingAsc(api);
+        }
+
+        if (category === "ratingDesc") {
+          const ratingSort = api.sort((a, b) => {
+            const isAflot = parseFloat(a.rating);
+            const isBflot = parseFloat(b.rating);
+            if (isNaN(isAflot)) return 1;
+            if (isNaN(isBflot)) return -1;
+            return isBflot - isAflot;
+          });
+          console.log(ratingSort);
+          setMedicineRatingDesc(ratingSort);
+        } else {
+          setMedicineRatingDesc(api);
         }
       })
       .catch((error) => {
@@ -101,7 +126,7 @@ const Homepage = () => {
 
   useEffect(() => {
     console.log("useEffect", medicine);
-    console.log("sort", medicinePrice);
+    // console.log("sort", medicinePrice);
     console.log(category);
   }, [medicine, category]);
 
@@ -138,41 +163,40 @@ const Homepage = () => {
   const handleSaveDiagnoze = async () => {
     // await getData(diagnoze);
     await getMedicine(diagnoze, category);
-
     setSavedDiagnoze([...savedDiagnoze, diagnoze]);
     setDiagnoze("");
   };
 
   const handleClearDiagnoze = () => {
+    setSavedDiagnoze([]);
     setDiagnoze([]);
   };
 
   let categoryRender;
 
-  if (category === "price") {
-    categoryRender = medicinePrice ? (
-      <MedicineListAlo medicine={medicinePrice} />
+  if (category === "priceAsc") {
+    categoryRender = medicinePriceAsc ? (
+      <MedicineListAlo medicine={medicinePriceAsc} />
     ) : null;
-  } else if (category === "rating") {
-    categoryRender = medicineRating ? (
-      <MedicineListAlo medicine={medicineRating} />
+  } else if (category === "priceDesc") {
+    categoryRender = medicineRatingDesc ? (
+      <MedicineListAlo medicine={medicineRatingDesc} />
+    ) : null;
+  } else if (category === "ratingAsc") {
+    categoryRender = medicineRatingAsc ? (
+      <MedicineListAlo medicine={medicineRatingAsc} />
+    ) : null;
+  } else if (category === "ratingDesc") {
+    categoryRender = medicineRatingAsc ? (
+      <MedicineListAlo medicine={medicineRatingDesc} />
     ) : null;
   } else if (category === "") {
     categoryRender = medicine ? <MedicineListAlo medicine={medicine} /> : null;
   }
 
-  const handleSortCategory = async (category) => {
-    if (category === "price") {
-      // Mengubah nilai sortPriceAsc jika category adalah 'price'
-      setSortPriceAsc((prev) => !prev);
-    }
-
-    if (category === "rating") {
-      // Mengubah nilai sortRatingAsc jika category adalah 'rating'
-      setSortRatingAsc((prev) => !prev);
-    }
-
+  const handleSortCategory = async (category, sorting) => {
     setCategory(category);
+    setSorting(sorting);
     await getMedicine(savedDiagnoze, category);
   };
 
@@ -201,7 +225,10 @@ const Homepage = () => {
                         <TrashIcon />
                       </button>
                       <button
-                        onClick={async () => await handleSaveDiagnoze()}
+                        onClick={async () => {
+                          await handleSaveDiagnoze();
+                          setIsSearch(true);
+                        }}
                         disabled={!diagnoze}
                       >
                         <SearchIcon />
@@ -237,20 +264,93 @@ const Homepage = () => {
               </div>
             </div>
 
-            <div className="mt-4 flex h-fit w-full justify-center gap-4 lg:pr-16">
-              <button
-                onClick={() => handleSortCategory("price")}
-                className="w-fit rounded-xl bg-dpurple px-4  py-1 font-nunito font-bold text-white"
-              >
-                Price {sortPriceAsc ? "Ascending" : "Descending"}
-              </button>
-              <button
-                onClick={() => handleSortCategory("rating")}
-                className="w-fit rounded-xl bg-dpurple px-4 py-1 font-nunito font-bold text-white"
-              >
-                Rating {sortRatingAsc ? "Ascending" : "Descending"}
-              </button>
-            </div>
+            {/* Sorting */}
+            {isSearch ? (
+              <>
+                {" "}
+                <div className="mt-5 flex h-fit w-full items-center justify-between gap-4">
+                  <div className="font-inter text-dblack">
+                    <p className="font-semibold lg:text-lg">
+                      Menampilkan produk untuk{" "}
+                      <span className="font-extrabold">"{savedDiagnoze}"</span>
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-center gap-x-4">
+                    <p className="font-inter font-extrabold text-dblack lg:text-lg">
+                      Urutkan
+                    </p>
+                    <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      className="relative flex items-center gap-x-2 rounded-lg bg-white px-4 py-3"
+                    >
+                      <p className="font-inter font-bold text-dblack">
+                        {sorting}
+                      </p>
+                      <DropDownIcon />
+                      {isOpen ? (
+                        <div className="absolute inset-x-0 -bottom-44 z-50 h-fit w-full overflow-hidden rounded-lg border-2 border-dpurple bg-white/80 backdrop-blur-sm transition-all ">
+                          <div
+                            onClick={() =>
+                              handleSortCategory("priceAsc", "Harga Termurah")
+                            }
+                            className="flex px-4 py-2 text-dblack hover:bg-dpurple hover:text-white"
+                          >
+                            <p className="font-inter font-bold ">
+                              Harga Termurah
+                            </p>
+                          </div>
+                          <div
+                            onClick={() =>
+                              handleSortCategory("priceDesc", "Harga Termahal")
+                            }
+                            className="flex px-4 py-2 text-dblack hover:bg-dpurple hover:text-white"
+                          >
+                            {" "}
+                            <p className="font-inter font-bold ">
+                              Harga Termahal
+                            </p>
+                          </div>
+                          <div
+                            onClick={() =>
+                              handleSortCategory(
+                                "ratingAsc",
+                                "Rating Tertinggi"
+                              )
+                            }
+                            className="flex px-4 py-2 text-dblack hover:bg-dpurple hover:text-white"
+                          >
+                            {" "}
+                            <p className="font-inter font-bold ">
+                              Rating Tertinggi
+                            </p>
+                          </div>
+                          <div
+                            onClick={() =>
+                              handleSortCategory(
+                                "ratingDesc",
+                                "Rating Terendah"
+                              )
+                            }
+                            className="flex px-4 py-2 text-dblack hover:bg-dpurple hover:text-white"
+                          >
+                            {" "}
+                            <p className="font-inter font-bold ">
+                              Rating Terendah
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+
+            {/* Medicine List */}
             {categoryRender}
             {/* <MedicineList medicine={med} /> */}
           </div>

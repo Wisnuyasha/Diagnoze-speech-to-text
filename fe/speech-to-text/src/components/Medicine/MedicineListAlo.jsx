@@ -98,7 +98,7 @@ export default function MedicineListAlo({ medicine }) {
                 {med.name}
               </span>
               <p className="font-inter text-base font-semibold text-dblack">
-                IDR {med.price.amount}
+                {med.price.display_amount}
               </p>
               <div className="flex w-full gap-2">
                 <span className="flex items-center gap-1 font-inter text-base font-semibold text-dblack">
